@@ -8,16 +8,16 @@ const dotenv = require('dotenv');
 exports.register = async(req, res) => {
     try {
         const bcSalt = bcrypt.genSaltSync(10)
-        const {firstName, lastName, email, password, role} = req.body;
+        const {firstName, lastName, email, password, role, location} = req.body;
         const user = await User.create({
             firstName: firstName,
             lastName: lastName,
             email: email,
             password: bcrypt.hashSync(password, bcSalt),
             role,
+            location
         });
 
-        
 
         const token = signToken(user)
 
