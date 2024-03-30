@@ -17,10 +17,10 @@ module.exports = {
     dialect: "mysql"
   },
   production: {
-    username: "root",
-    password: null,
-    database: "database_production",
-    host: "127.0.0.1",
+    username: process.env.REMOTE_USERNAME,
+    password: process.env.REMOTE_PASSWORD,
+    database: process.env.REMOTE_DATABASE,
+    host: process.env.REMOTE_HOST,
     dialect: "mysql"
   }
 }
