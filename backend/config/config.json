@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "root",
-    "password": null,
-    "database": "handyhire",
-    "host": "localhost",
+    "username": "uh3uoqez3d9nv7mw",
+    "password": "ClGZXFOzvHwdTTLy7lgd",
+    "database": "bjnrozxwwjmkrgwbpzlg",
+    "host": "bjnrozxwwjmkrgwbpzlg-mysql.services.clever-cloud.com",
     "dialect": "mysql"
   },
   "test": {

@@ -40,6 +40,14 @@ exports.login = async(req, res) => {
         const {email, password} = req.body
 
         const user = await User.findOne({where: {email: email}});
+
+        if(!user){
+            res.status(404).json({
+                success: false,
+                message: 'No user foud'
+            }) 
+            return;
+        }
         const vfy = await bcrypt.compare(
             password,
             user.password

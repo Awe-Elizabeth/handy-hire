@@ -4,7 +4,7 @@ import handyicon3 from '../assets/handyicon3.jpg'
 import handyicon from '../assets/handyicon.jpg'
 import handylogo from '../assets/handylogo.jpg'
 import handyicon2 from '../assets/handyicon2.jpg'
-
+import { Link } from 'react-router-dom';
 
 
 function Startup() {
@@ -96,8 +96,8 @@ function Startup() {
           onClick={
             () => console.log(role)
           }
-          ><a>Create Account</a></button>
-          <h6>Already have an Account?<a href="#">Login</a></h6>
+          ><a><Link to={'/register'}>Create Account</Link></a></button>
+          <h6>Already have an Account?<a ><Link to={'/login'}>Login</Link></a></h6>
         </div>
       </div>
     </div>
