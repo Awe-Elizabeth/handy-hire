@@ -44,7 +44,7 @@ exports.login = async(req, res) => {
         if(!user){
             res.status(404).json({
                 success: false,
-                message: 'No user foud'
+                message: 'No user found'
             }) 
             return;
         }
@@ -59,12 +59,12 @@ exports.login = async(req, res) => {
                 success: true,
                 result: user,
                 token: token
-            })
+            });
         }else{
             res.status(403).json({
                 success: false,
                 message: 'invalid credentials'
-            })
+            });
         }
 
 
