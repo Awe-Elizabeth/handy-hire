@@ -10,14 +10,14 @@ import Matching from './components/Matching'
 import Portfolio from './components/Portfolio'
 import Profile from './components/Profile'
 import ProfiledIt from './components/ProfiledIt'
+import { UserContextProvider } from './context/UserContextProvider'
 // import Layout from './Layout.jsx'
 
 function App() {
 
-
   return (
-    
-     <Routes>
+    <UserContextProvider>
+      <Routes>
      <Route path="/" element={<Startup />} />
      <Route path="/register" element={<Register />} />
      <Route path="/login" element={<Login />} />
@@ -28,6 +28,8 @@ function App() {
      <Route path="/profile" element={<Profile />} />
      <Route path="/profiledit" element={<ProfiledIt />} />
      </Routes>
+    </UserContextProvider>
+     
 
   )
 }

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import handyimg from '../assets/handyimg.jpg'
 import handyicon3 from '../assets/handyicon3.jpg'
 import handyicon2 from '../assets/handyicon2.jpg'
@@ -8,6 +8,7 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import { useNavigate } from "react-router-dom";
+import UserContext from '../context/userContex'
 
 function Register() {
   const [firstName, setFirstName] = useState('');
@@ -20,6 +21,7 @@ function Register() {
   const [errDisplay, setErrDisplay] = useState('none');
   const navigate = useNavigate();
 
+  const {setUser, user} = useContext(UserContext);
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -33,19 +35,20 @@ function Register() {
       setErrDisplay('none');
     }
 
-    const headers = {
-      'Content-Type': 'application/json',
-    };
+    // const headers = {
+    //   'Content-Type': 'application/json',
+    // };
     
-    axios.post( 'https://handy-hire.onrender.com/api/v1/auth/register', JSON.stringify(registerData), {headers})
-    .then(function (response) {
-      console.log(response.data) 
-      if(response.data.success === true){
-        localStorage.setItem('token', response.data.token);
-        navigate("/login");
-      }
+    // axios.post( 'https://handy-hire.onrender.com/api/v1/auth/register', JSON.stringify(registerData), {headers})
+    // .then(function (response) {
+    //   console.log(response.data) 
+    //   if(response.data.success === true){
+    //     localStorage.setItem('token', response.data.token);
+    //     setUser({data: response});
+    //     navigate("/login");
+    //   }
 
-    }).catch((err) => console.log(err));
+    // }).catch((err) => console.log(err));
 
   }
 
@@ -55,7 +58,7 @@ function Register() {
     lastName: lastName,
     email: email,
     password: password,
-    role: 'artisan',
+    role: user.role,
     location: country
   }
 
