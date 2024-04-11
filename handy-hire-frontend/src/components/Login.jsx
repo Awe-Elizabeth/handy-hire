@@ -3,6 +3,8 @@ import handylogo from '../assets/handylogo.jpg';
 import handyicon3 from '../assets/handyicon3.jpg';
 import google_symbol from '../assets/google_symbol.png.png'
 import facebook_symbol from '../assets/facebook_symbol.png.png'
+import profile from '../assets/profile.png'
+import shield from '../assets/shield.png'
 import { useState } from 'react';
 import axios from 'axios'
 
@@ -72,7 +74,10 @@ function Login() {
             onSubmit={handleSubmit}
             >
               <label htmlFor="Email">Email</label>
-
+              <div className='log_icon'>
+              <img src={profile} alt="" style={{width: '70%', height: '100%', objectFit: 'fill'}}/>
+              </div>
+              
               <input type="text"  
               required
               value={email}
@@ -80,7 +85,10 @@ function Login() {
               />
               <p style={displayStyle}>Email is incorrect</p>
               <label htmlFor="Password">Password</label>
-
+              <div className='log_icon'>
+              <img  src={shield} alt="" style={{width: '70%', height: '100%', objectFit: 'fill'}} />
+              </div>
+              
               <input type="password" 
                required
                value={password}
@@ -89,7 +97,7 @@ function Login() {
               <p style={displayStyle}>Password is incorrect</p>
               <br />
               <p style={{color: "red", fontSize: "1rem", display: invalid}}>This user does not exist</p>
-            <span className="d-flex" style={{justifyContent: "space-between"}}>
+            <span className="d-flex" style={{justifyContent: "space-between", marginTop: '20px'}}>
               <p className="form_text2">
                 <img src={handyicon3} alt="icon" />Keep me logged in
               </p>
