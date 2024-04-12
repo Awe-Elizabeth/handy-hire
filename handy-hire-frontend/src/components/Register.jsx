@@ -35,20 +35,23 @@ function Register() {
       setErrDisplay('none');
     }
 
-    // const headers = {
-    //   'Content-Type': 'application/json',
-    // };
+    const headers = {
+      'Content-Type': 'application/json',
+    };
     
-    // axios.post( 'https://handy-hire.onrender.com/api/v1/auth/register', JSON.stringify(registerData), {headers})
-    // .then(function (response) {
-    //   console.log(response.data) 
-    //   if(response.data.success === true){
-    //     localStorage.setItem('token', response.data.token);
-    //     setUser({data: response});
-    //     navigate("/login");
-    //   }
+    axios.post( 'https://handy-hire.onrender.com/api/v1/auth/register', JSON.stringify(registerData), {headers})
+    .then(function (response) {
+      console.log(response.data) 
+      if(response.data.success === true){
+        console.log(response.data.result);
+        localStorage.setItem('token', response.data.token);
+        localStorage.setItem('firstName', response.data.result.firstName);
+        localStorage.setItem('lastName', response.data.result.lastName);
+        setUser({id: response.data.result.userid, firstName: response.data.result.firstName, lastName: response.data.result.lastName, role: response.data.result.role});
+        navigate("/dashboard");
+      }
 
-    // }).catch((err) => console.log(err));
+    }).catch((err) => console.log(err));
 
   }
 

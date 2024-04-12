@@ -16,6 +16,23 @@ exports.getUsers = async(req, res) => {
     }
 }
 
+exports.getUsersById = async(req, res) => {
+    try {
+        const user = await User.findOne({where: {userid: req.params.id}});
+
+        res.status(200).json({
+            success: true,
+            data: user
+        })
+    } catch (error) {
+        res.status(200).json({
+            success: true,
+            data: error
+        });
+        console.log(error)
+    }
+}
+
 exports.getUsersbylocation = async(req, res) => {
     const {location} = req.body;
 
