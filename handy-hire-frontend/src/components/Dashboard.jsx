@@ -39,8 +39,8 @@ function Dashboard() {
   const [categories, setCategories] = useState([]);
   const [activeId, setActiveId] = useState('');
   const {setUser, user} = useContext(UserContext);
-  var firstName = localStorage.getItem("firstName");
-  var lastName = localStorage.getItem("lastName");
+  var firstName = sessionStorage.getItem("firstName");
+  var lastName = sessionStorage.getItem("lastName");
   
   
     useEffect(() => {

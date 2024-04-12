@@ -44,9 +44,10 @@ function Register() {
       console.log(response.data) 
       if(response.data.success === true){
         console.log(response.data.result);
-        localStorage.setItem('token', response.data.token);
-        localStorage.setItem('firstName', response.data.result.firstName);
-        localStorage.setItem('lastName', response.data.result.lastName);
+        sessionStorage.setItem('token', response.data.token);
+        sessionStorage.setItem('firstName', response.data.result.firstName);
+        sessionStorage.setItem('lastName', response.data.result.lastName);
+        sessionStorage.setItem('id', response.data.result.userid);
         setUser({id: response.data.result.userid, firstName: response.data.result.firstName, lastName: response.data.result.lastName, role: response.data.result.role});
         navigate("/dashboard");
       }
