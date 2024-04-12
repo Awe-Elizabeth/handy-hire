@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import handylogo from '../assets/handylogo.jpg'
 import home from '../assets/home.png'
 import portfolio from '../assets/portfolio.png'
@@ -32,6 +32,12 @@ import dish from '../assets/dish.png'
 import electrician from '../assets/electrician.png'
 
 function Dashboard() {
+
+  useEffect(() => {
+    document.title = 'dashboard';
+  });
+
+  
   return (
 
     <div>

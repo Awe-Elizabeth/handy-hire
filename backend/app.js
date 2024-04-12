@@ -15,6 +15,7 @@ dotenv.config()
 const authRoutes = require('./routes/auth.router');
 const userRoutes = require('./routes/users.router');
 const portfolioRoutes = require('./routes/portfolio.router');
+const categoryRoutes = require('./routes/category.router');
 
 
 
@@ -27,6 +28,7 @@ app.use(cors())
 app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/users', userRoutes);
 app.use('/api/v1/portfolio', portfolioRoutes);
+app.use('/api/v1/categories', categoryRoutes);
 
 
 db.sequelize.sync().then(() => {

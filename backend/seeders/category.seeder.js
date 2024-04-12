@@ -23,6 +23,14 @@
           {
             name: 'Janitoral and Cleaning Services',
             description: 'Janitorial and cleaning category'
+          },
+          {
+            name: 'Baking',
+            description: 'Baking Category'
+          },
+          {
+            name: 'Painting',
+            description: 'Painting Category'
           }
         ]);
 

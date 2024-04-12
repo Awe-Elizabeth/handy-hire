@@ -1,6 +1,6 @@
 const {Category} = require('../models');
 
-exports.getCategories = async() => {
+exports.getCategories = async(req, res) => {
     try {
         const categories = await Category.findAll();
 
