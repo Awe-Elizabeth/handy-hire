@@ -1,0 +1,44 @@
+.arrow_div{
+    justify-content: space-between;
+   width: 50%; 
+   padding-left: 2rem;
+
+   &_heading{
+    padding-left: 1.5rem;
+
+    button{
+        
+   background-color: #4862be;
+   border: none;
+   color: white;
+   padding: 7px;
+   border-radius: 7px;
+   width: 130px;
+    }
+   }
+
+}
+
+.info_section{
+    width: 100%;
+    justify-content: space-between;
+    padding: 1.5rem;
+    gap: 5%;
+
+   .img{
+    width: 700px;
+    height: 500px;
+    margin-left: 1rem;
+   }
+
+   .info_img{
+    width: 600px;
+  padding: .7rem;
+    img{
+        width: 207px;
+        height: 106px;
+        margin-left: 10px;
+    }
+   }
+
+}

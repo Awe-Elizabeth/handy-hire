@@ -11,6 +11,9 @@ body {
     align-items: center;
     justify-content: center;
     display: grid;
+    position: absolute;
+    top: 5%;
+    bottom: 5%;
    
    
   
@@ -24,13 +27,13 @@ body {
       height: 40px;
       border-radius: 5px;
       border: 1px solid blue;
+      padding: 0 3%;
     }
     label {
       display: block;
       margin-top: 20px;
     }
     .form_text2 {
-      margin-top: 10px;
       img {
         margin-right: 5px;
       }
@@ -43,6 +46,9 @@ body {
       border: none;
       border-radius: 7px;
       color: white;
+    }
+    button:hover{
+      cursor: pointer;
     }
   
   .last_div {

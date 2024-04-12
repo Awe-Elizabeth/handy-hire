@@ -2,23 +2,23 @@ const User = require("./User");
 
 module.exports = (sequelize, DataTypes) => {
 
-    const Schedule = sequelize.define("Schedule",{
+    const Portfolio = sequelize.define("Portfolio",{
         id: {
             type:DataTypes.UUID,
             defaultValue:DataTypes.UUIDV4,
             allowNull:false,
             primaryKey:true
         },
-        time:{
-            type:DataTypes.DATE,
-            allowNull:false,
-        },
-        venue: {
+        title:{
             type:DataTypes.STRING,
             allowNull:false,
         },
-        venueLink: {
-            type:DataTypes.TEXT,
+        projectDescription:{
+            type: DataTypes.TEXT,
+            allowNull: true
+        },
+        completionDate: {
+            type:DataTypes.DATE,
             allowNull:false,
         },
         createdAt:{
@@ -27,15 +27,13 @@ module.exports = (sequelize, DataTypes) => {
         }
     });
 
-    Schedule.associate = (models) => {
-        Schedule.belongsTo(models.User, {
-            foreignKey: 'artisanId',
-            // constraints: false
-        });
-        Schedule.belongsTo(models.User, {
-            foreignKey: 'businessId',
+    Portfolio.associate = (models) => {
+        // Portfolio.hasMany(models.Image );
+        // Portfolio.hasMany(models.Skill );
+        Portfolio.belongsTo(models.User, {
+            foreignKey: 'userId',
             // constraints: false
         });
     }
-    return Schedule;
+    return Portfolio;
 }

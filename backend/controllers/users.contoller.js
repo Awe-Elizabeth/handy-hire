@@ -9,7 +9,10 @@ exports.getUsers = async(req, res) => {
             data: users
         })
     } catch (error) {
-        
+        res.status(200).json({
+            success: true,
+            data: error
+        })
     }
 }
 

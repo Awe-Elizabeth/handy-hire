@@ -77,9 +77,9 @@ module.exports = (sequelize, DataTypes) => {
     });
 
     User.associate = (models) => {
-
-       
-        User.hasMany(models.Schedule );
+        User.hasMany(models.Portfolio );
+        User.hasMany(models.Image );
+        User.hasMany(models.Skill );
         User.belongsTo(models.Category, {
             foreignKey: 'CategoryId',
             // constraints: false

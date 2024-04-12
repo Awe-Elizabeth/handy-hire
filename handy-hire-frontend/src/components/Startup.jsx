@@ -1,17 +1,30 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import handyimg from '../assets/handyimg.jpg'
 import handyicon3 from '../assets/handyicon3.jpg'
 import handyicon from '../assets/handyicon.jpg'
 import handylogo from '../assets/handylogo.jpg'
 import handyicon2 from '../assets/handyicon2.jpg'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import UserContext from '../context/userContex';
 
 
 function Startup() {
     const [logo, setLogo] = useState(handyicon3);
     const [logo2, setLogo2] = useState(handyicon3);
     const [role, setRole] = useState('');
+    const [display, setDisplay] = useState('none');
+    const {setUser, user} = useContext(UserContext);
+    const navigate = useNavigate()
 
+    const handleClick = () => {
+      if(role !== 'business' && role !== 'artisan'){
+        setDisplay('block');
+        return;
+      }
+      setUser({role: role});
+      navigate('/register')
+    }
+    
 
   return (
     <>
@@ -92,11 +105,14 @@ function Startup() {
             </label>
             
           </span>
+          <p style={{marginTop: "20px", color: "red", fontSize: "1rem", display: display}}>Please select a valid role</p>
           <button
           onClick={
-            () => console.log(role)
+            handleClick
           }
-          ><a><Link to={'/register'}>Create Account</Link></a></button>
+          ><a>
+            Create Account
+            </a></button>
           <h6>Already have an Account?<a ><Link to={'/login'}>Login</Link></a></h6>
         </div>
       </div>

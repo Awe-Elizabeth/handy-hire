@@ -1,0 +1,110 @@
+Body {
+    width: 100%;
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+  }
+
+.Arrow{
+    display: flex;
+    justify-content: space-between;
+    padding-left: 2rem;
+    width: 30%;
+    
+}
+
+.profile{
+    width: 100%;
+
+  
+    &_span{
+        width: 20%;
+        padding: 1rem 0 0 2rem;
+
+        .button{
+            background-color: #4862be;
+            border: none;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 7px;
+            width: 150px;
+        } 
+     }
+    &_div{
+    width: 80%;
+    }
+    &_second_div{
+        display: flex;
+    justify-content: space-between;
+     width: 80%;
+     padding: 4rem;
+     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+     margin-bottom: 2rem;
+     .button{
+        width: 130px;
+        height: 40px;
+        background-color: #4862be;
+        border: none;
+        border-radius: 7px;
+        color: white;
+
+        button{
+            background-color: #4862be;
+            border: none;
+            color: white;
+            padding-top: 10px;
+        }
+     }
+    }
+
+    .info{
+        box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+        width: 80%;
+     padding: 3rem;
+
+     td{
+        margin-top: 30px;
+     }
+
+     .button{
+        width: 80px;
+        height: 40px;
+        background-color: #4862be;
+        border: none;
+        border-radius: 7px;
+        color: white;
+
+        button{
+            background-color: #4862be;
+            border: none;
+            color: white;
+            padding-top: 10px;
+        } }
+    }
+    .Address{
+        box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+        margin-top: 2rem;
+        width: 80%;
+     padding: 2rem;
+
+     td{
+        margin-top: 30px;
+     }
+
+     .button{
+        width: 80px;
+        height: 40px;
+        background-color: #4862be;
+        border: none;
+        border-radius: 7px;
+        color: white;
+
+        button{
+            background-color: #4862be;
+            border: none;
+            color: white;
+            padding-top: 10px;
+        } }
+    }
+}
