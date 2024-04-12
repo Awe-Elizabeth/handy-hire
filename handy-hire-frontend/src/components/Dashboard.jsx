@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import handylogo from '../assets/handylogo.jpg'
 import home from '../assets/home.png'
 import portfolio from '../assets/portfolio.png'
@@ -30,14 +30,54 @@ import repair from '../assets/repair.png'
 import toilet from '../assets/toilet.png'
 import dish from '../assets/dish.png'
 import electrician from '../assets/electrician.png'
+import axios from 'axios'
+import UserContext from '../context/userContex'
+import { Link } from 'react-router-dom'
+
 
 function Dashboard() {
+  const [categories, setCategories] = useState([]);
+  const [activeId, setActiveId] = useState('');
+  const {setUser, user} = useContext(UserContext);
+  var firstName = localStorage.getItem("firstName");
+  var lastName = localStorage.getItem("lastName");
+  
+  
+    useEffect(() => {
+      document.title = 'dashboard';
+  
+      let length;
+      const headers = {
+        'Content-Type': 'application/json',
+      };
+      
+      axios.get( 'https://handy-hire.onrender.com/api/v1/categories', {headers})
+      .then(function (response) {
+        
+        if(response.data.success === true){
+          setCategories(response.data.data)
+          length = categories.length
+          console.log(response.data.data) 
+        }
+  
+      }).catch((err) => console.log(err));
+      
+  
+    },[length]);
 
-  useEffect(() => {
-    document.title = 'dashboard';
-  });
+    const activeStyle = {
+    
+      backgroundColor: "#4862BE",
+
+    }
+
+    const handleDivClick = (id) => {
+      setActiveId(id)
+    }
 
   
+
+
   return (
 
     <div>
@@ -48,7 +88,7 @@ function Dashboard() {
             </div>
             <div className="header_icons">
                 <div className="search_bar">  <img src={search} alt="search" width="25px" height="25px" className="p-1"/> <p className="mr-2">What service are you looking for?</p></div>
-                <div className="header_img"> <img src={faq} alt="#" width="50px" height="50px"/> <img src={notification} alt=""  width="50px" height="50px"/> <span><img src={mary} alt=""/> <strong>Mary Maxwell</strong><img src={arrowDown} alt=""/></span>
+                <div className="header_img"> <img src={faq} alt="#" width="50px" height="50px"/> <img src={notification} alt=""  width="50px" height="50px"/> <span><img src={mary} alt=""/> <Link style={{textDecoration: 'none', color: 'black'}} to={'/profile'}><strong>{firstName ? firstName : 'Mary'}  {lastName ? lastName : 'Maxwell'}</strong></Link><img src={arrowDown} alt=""/></span>
             </div>
             
         </div>
@@ -57,7 +97,8 @@ function Dashboard() {
     <section className="sections">
             <div className="sections_div">
                 <div className="side_bar  m-0" style={{backgroundColor: "#4862BE"}}><span className="d-flex"><img src={home} alt="" className="img"/><p>Home </p></span><img src={arrowRight} alt="" className="images"/></div>
-                <div className="side_bar"><span><img src={portfolio} alt="" className="img"/><p>Portfolio </p></span><img src={arrowRight} alt="" className="images"/></div>
+                <Link to={'/portfolio'} style={{textDecoration: 'none', color: 'black'}}><div className="side_bar"><span><img src={portfolio} alt="" className="img"/><p>Portfolio </p></span><img src={arrowRight} alt="" className="images"/></div></Link>
+                
                 <div className="side_bar"><span><img src={message} alt="" className="imgs"/><p>Messages</p></span> <img src={arrowRight} alt="" className="images"/></div>
                 <div className="side_bar"><span><img src={message} alt="" className="imgs"/><p>Reports</p></span> <img src={arrowRight} alt="" className="images"/></div>
                 <div className="side_bar"><span><img src={listing} alt="" className="imgs"/><p>Listing</p></span> <img src={arrowRight} alt="" className="images"/></div>
@@ -67,7 +108,7 @@ function Dashboard() {
             </div>
          
            <div className="Dashboard">
-            <h4 className="text"><strong>Welcome to HandyHire, Mary </strong><img src={emoji} alt=""/></h4>
+            <h4 className="text"><strong>Welcome to HandyHire, {firstName ? firstName : 'Mary'} </strong><img src={emoji} alt=""/></h4>
             <div className="Dashboard_header">
                 <span><h4>RECOMMENDED FOR YOU</h4>
                     <h6>Get matched with an artisan</h6>
@@ -87,13 +128,27 @@ function Dashboard() {
 
              <div className="cat d-flex">
               <div className="feature p-1">
-                <div className="p-1 m-0" style={{backgroundColor: "#4862BE"}}><p>Construction</p></div>
-                <div><span><p>Manufacturing </p></span></div>
+                {
+                  categories.map((category, index) => {
+                    return(
+                      (
+                    
+                        <div className={ category.id == activeId ? "p-1 m-0 active" : "p-1 m-0"} key={index} value={category.id}
+                        onClick={() => {handleDivClick(category.id)
+
+                        }}
+                        ><span><p >{category.name}</p></span></div>
+                      ))
+                    
+                  })
+                }
+                {/* <div className="p-1 m-0" style={{backgroundColor: "#4862BE"}}><p>Construction</p></div> */}
+                
+               {/* <div><span><p>Manufacturing </p></span></div>
                 <div><span><p>Food Services and Hospitality</p></span></div>
-                <div><p>Manufacturing </p></div>
                 <div><p>  Janitorial and Cleaning Services</p></div>
                 <div><p>  Baking</p></div>
-                <div><p>  painting</p></div>
+                <div><p>  painting</p></div> */}
                
                </div>
                <div>

@@ -4,6 +4,28 @@ import arrowLeft from '../assets/arrow-left.png'
 import pencil from '../assets/pencil.png'
 
 function Profile() {
+  useEffect(() => {
+    document.title = 'dashboard';
+
+    let length;
+    const headers = {
+      'Content-Type': 'application/json',
+    };
+    
+    axios.get( `https://handy-hire.onrender.com/api/v1/users/${user.id}`, {headers})
+    .then(function (response) {
+      
+      if(response.data.success === true){
+        setCategories(response.data.data)
+        length = categories.length
+        console.log(response.data.data) 
+      }
+
+    }).catch((err) => console.log(err));
+    
+
+  },[length]);
+
   return (
     <>
     <h3 className="p-4"><strong>ACCOUNT</strong> </h3>
