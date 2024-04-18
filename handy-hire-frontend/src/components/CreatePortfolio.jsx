@@ -59,6 +59,7 @@ function CreatePortfolio() {
     completionDate: user.date,
     images: image,
     skills: skills,
+    description: description,
     about: about,
     details: hireDetail
   }
