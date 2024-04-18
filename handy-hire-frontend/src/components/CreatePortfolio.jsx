@@ -2,16 +2,19 @@ import React, { useContext, useState } from 'react'
 import arrowUp from '../assets/arrow-up.jpg'
 import pencil from '../assets/pencil.png'
 import UserContext from '../context/userContex';
+import axios from 'axios'
 
 
 function CreatePortfolio() {
   const {setUser, user} = useContext(UserContext);
-  const [image, setImage] = useState('');
+  const [image, setImage] = useState([]);
   const [skills, setSkills] = useState('');
   const [description, setDescription] = useState('');
   const [about, setAbout] = useState('');
   const [hireDetail, setHireDetails] = useState('');
-  const images = []
+  const imageArray = []
+
+
 
   const handleFileInputChange = (event) => {
     const file = event.target.files[0];
@@ -20,18 +23,39 @@ function CreatePortfolio() {
 
     reader.onload = (event) => {
       const base64 = event.target.result;
-      images.push(base64);
+      setImage(image => [...image, base64] )
     };
-    console.log(images)
+     
   };
+
+
+  const submitPortfolio = () => {
+
+    console.log(createPortfolioData);
+
+    const headers = {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${sessionStorage.getItem("token")}`
+    };
+    axios.post( `https://handy-hire.onrender.com/api/v1/portfolio`, JSON.stringify(createPortfolioData), {headers})
+    .then(function (response) {
+      
+      if(response.data.success === true){
+        //status = true
+        console.log(response.data)
+      }
+
+    }).catch((err) => console.log(err));
+    
+  }
 
   const createPortfolioData = {
     title: user.title,
     completionDate: user.date,
-    images: images,
+    images: image,
     skills: skills,
     about: about,
-    hireDetail: hireDetail
+    details: hireDetail
   }
   
   return (
@@ -77,7 +101,9 @@ function CreatePortfolio() {
            value={description}
            onChange={(e) => setDescription(e.target.value)} 
            ></textarea><br/>
-           <span><button className="btn1">Cancel</button> <button className="btn2">Continue</button></span>
+           <span><button className="btn1">Cancel</button> <button className="btn2"
+           onClick={submitPortfolio}
+           >Continue</button></span>
           </div>
     </section>
     </>

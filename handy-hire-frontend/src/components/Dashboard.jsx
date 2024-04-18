@@ -97,7 +97,7 @@ function Dashboard() {
     <section className="sections">
             <div className="sections_div">
                 <div className="side_bar  m-0" style={{backgroundColor: "#4862BE"}}><span className="d-flex"><img src={home} alt="" className="img"/><p>Home </p></span><img src={arrowRight} alt="" className="images"/></div>
-                <Link to={'/portfolio'} style={{textDecoration: 'none', color: 'black'}}><div className="side_bar"><span><img src={portfolio} alt="" className="img"/><p>Portfolio </p></span><img src={arrowRight} alt="" className="images"/></div></Link>
+                <Link to={'/portfoliobrief'} style={{textDecoration: 'none', color: 'black'}}><div className="side_bar"><span><img src={portfolio} alt="" className="img"/><p>Portfolio </p></span><img src={arrowRight} alt="" className="images"/></div></Link>
                 
                 <div className="side_bar"><span><img src={message} alt="" className="imgs"/><p>Messages</p></span> <img src={arrowRight} alt="" className="images"/></div>
                 <div className="side_bar"><span><img src={message} alt="" className="imgs"/><p>Reports</p></span> <img src={arrowRight} alt="" className="images"/></div>

@@ -16,6 +16,7 @@ function Profile() {
     //let status;
     const headers = {
       'Content-Type': 'application/json',
+      'Authorization': `Bearer ${sessionStorage.getItem("token")}`
     };
     axios.get( `https://handy-hire.onrender.com/api/v1/users/${id}`, {headers})
     .then(function (response) {
@@ -48,7 +49,7 @@ function Profile() {
             <img src={mary} alt=""/>
             
                  <span style={{paddingLeft: "2rem"}}><h4>{userData.firstName} {userData.lastName}</h4>
-                    <h6>Lagos, Nigeria</h6></span>
+                    <h6>{userData.state}, {userData.country}</h6></span>
             </span>
             <div className="button"><img src={pencil} alt="#"/><button>Edit Profile</button></div>
                 
@@ -90,8 +91,8 @@ function Profile() {
                     <td>Country</td>
                     <td> City/State</td>
                 </tr>
-                <tr><td style={{paddingRight: "6rem"}}>Nigeria</td>
-                <td style={{paddingRight: "6rem"}}>{userData.location}</td></tr>
+                <tr><td style={{paddingRight: "6rem"}}>{userData.country}</td>
+                <td style={{paddingRight: "6rem"}}>{userData.state}</td></tr>
               </table>
             </div>
             
