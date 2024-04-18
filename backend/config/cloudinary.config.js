@@ -11,7 +11,7 @@ v2.config({
 exports.uploadImage = async (data, id) => {
 
    dataUri = "data:image/jpeg;base64," + data
-     return v2.uploader.upload( dataUri, {
+     return v2.uploader.upload( data, {
         public_id: id
      },
      function(error, result){
