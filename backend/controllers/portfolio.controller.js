@@ -34,7 +34,7 @@ exports.getPortfoliosById = async(req, res) => {
     
     try {
         const [results, metadata] = await db.sequelize.query(`
-        select portfolios.id, portfolios.title, portfolios.projectDescription, images.data, skills.title as skills from ((portfolios INNER JOIN images ON images.portfolioId = portfolios.id) inner join skills on skills.portfolioId = portfolios.id) where images.portfolioId ="${req.params.id}" and skills.portfolioId = "${req.params.id}"
+        select Portfolios.id, Portfolios.title, Portfolios.projectDescription, Portfolios.about, Portfolios.details, Images.data, Skills.title as skills from ((Portfolios INNER JOIN Images ON Images.portfolioId = Portfolios.id) inner join Skills on Skills.PortfolioId = Portfolios.id) where Images.portfolioId ="${req.params.id}" and Skills.portfolioId = "${req.params.id}"
     `)       
      // console.log(req.params.id);
      
