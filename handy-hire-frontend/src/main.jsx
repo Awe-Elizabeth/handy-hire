@@ -10,6 +10,10 @@ import './sass/matching.scss'
 import './sass/profile.scss'
 import './sass/portfolio.scss'
 import './sass/profiledit.scss'
+import './sass/createportfolio.scss'
+import './sass/preview.scss'
+import './sass/brief.scss'
+import './sass/settings.scss'
 
 import { BrowserRouter } from 'react-router-dom'
 

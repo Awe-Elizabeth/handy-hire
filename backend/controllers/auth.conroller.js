@@ -2,24 +2,36 @@ const {User} = require('../models');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
+const crypto = require('crypto');
+const { forgotPasswordMail } = require('../utils/mail.utils');
 
 
 
 exports.register = async(req, res) => {
     try {
         const bcSalt = bcrypt.genSaltSync(10)
-        const {firstName, lastName, email, password, role, location} = req.body;
+        const {firstName, lastName, email, password, role, country, state, categoryId} = req.body;
         const user = await User.create({
             firstName: firstName,
             lastName: lastName,
             email: email,
             password: bcrypt.hashSync(password, bcSalt),
             role,
-            location
+            country,
+            state,
+            CategoryId: categoryId
         });
 
 
         const token = signToken(user)
+
+        // const host = req.headers.host
+        // try {
+        //     await forgotPasswordMail(email, host, token )
+        // } catch (error) {
+        //     console.log(error)
+        // }
+       
 
         res.status(200).json({
             success: true,
@@ -76,9 +88,51 @@ exports.login = async(req, res) => {
     }
 }
 
+exports.forgotPassword = async (req, res) => {
+    try {
+        const {email} = req.body
+
+        const user = await User.findOne({where: {email: email}});
+
+        if(!user){
+            res.status(400).json({
+                success: false,
+                message: 'user does not exist'
+            });
+            return;
+        }
+
+        // Generate a unique token
+        const token = crypto.randomBytes(20).toString('hex');
+
+        const _user = await User.update({
+           token : token,
+           tokenExp: new Date(Date.now()+20*60*1000)
+        },
+        {
+            where: {
+                userid: user.userid
+            }
+        });
+        
+        await forgotPasswordMail(email, req.headers.host, token);
+
+        res.status(400).json({
+            success: false,
+            result: _user
+        });
+        
+    } catch (error) {
+        console.log(error)
+        res.status(400).json({
+            success: false,
+            result: 'An error occurred'
+        });
+    }
+    
+}
 
 const signToken = (user) => {
-    console.log( process.env.JWT_SECRET)
     const token = jwt.sign(
         {id: user.userid, password: user.password}, 
         process.env.JWT_SECRET,

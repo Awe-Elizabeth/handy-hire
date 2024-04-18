@@ -42,7 +42,11 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.TEXT,
             allowNull: true
         },
-        location: {
+        country: {
+            type: DataTypes.STRING,
+            allowNull:true
+        },
+        state: {
             type: DataTypes.STRING,
             allowNull:true
         },
@@ -59,6 +63,13 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull:true,
             unique:true
+        },
+        token:{
+            type: DataTypes.STRING,
+            allowNull:true,
+        },
+        tokenExp:{
+            type: DataTypes.DATE
         },
         bio:{
             type: DataTypes.TEXT,

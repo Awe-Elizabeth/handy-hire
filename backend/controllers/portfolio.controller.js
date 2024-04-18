@@ -1,6 +1,7 @@
 const {Portfolio} = require('../models');
 const {Image} = require('../models');
 const {Skill} = require('../models');
+const {uploadImage} = require('../config/cloudinary.config')
 // const sequelize = require('sequelize')
 const db = require('../models');
 
@@ -8,12 +9,14 @@ exports.getPortfolios = async(req, res) => {
     
     try {
         const [results, metadata] = await db.sequelize.query(`
-        select portfolios.id, portfolios.title, portfolios.projectDescription, images.data, images.portfolioId, skills.title as skills from ((portfolios INNER JOIN images ON images.portfolioId = portfolios.id) inner join skills on skills.portfolioId = portfolios.id)`);
+        select portfolios.id, portfolios.title, portfolios.projectDescription, portfolios.createdAt, images.data, images.portfolioId, skills.title as skills from ((portfolios INNER JOIN images ON images.portfolioId = portfolios.id) inner join skills on skills.portfolioId = portfolios.id)`);
         // console.log(req.params.id);
         res.status(200).json({
             success: true,
             data: results
         });
+
+        
     } catch (error) {
         res.status(200).json({
             success: true,
@@ -26,14 +29,40 @@ exports.getPortfolios = async(req, res) => {
 }
 
 exports.getPortfoliosById = async(req, res) => {
+    let images = [];
+    let skills = [];
     
     try {
         const [results, metadata] = await db.sequelize.query(`
         select portfolios.id, portfolios.title, portfolios.projectDescription, images.data, skills.title as skills from ((portfolios INNER JOIN images ON images.portfolioId = portfolios.id) inner join skills on skills.portfolioId = portfolios.id) where images.portfolioId ="${req.params.id}" and skills.portfolioId = "${req.params.id}"
-    `)        // console.log(req.params.id);
+    `)       
+     // console.log(req.params.id);
+     
+        for(let i = 0; i < results.length; i++){
+            const setObj = new Set(images)
+            const skillsObj = new Set(skills)               
+            
+            if(!setObj.has(results[i].data)){ 
+                images.push(results[i].data);
+            }
+            
+            if(!skillsObj.has(results[i].skills)){
+                skills.push(results[i].skills);
+            }
+           
+        }
+
+        let responseData = {
+            id: results[0].id,
+            title: results[0].title,
+            projectDescription: results[0].projectDescription,
+            images: images,
+            skills: skills
+        }
+
         res.status(200).json({
             success: true,
-            data: results
+            data: responseData
         });
     } catch (error) {
         res.status(200).json({
@@ -48,38 +77,54 @@ exports.getPortfoliosById = async(req, res) => {
 
 exports.createPortfolio = async(req, res) => {
     try {
-        const {title, completionDate, images, videos, skills, description} = req.body
+        const {title, completionDate, images, videos, skills, description, about, details} = req.body
 
         console.log(req.user.id);
         const portfolio = await  Portfolio.create({
             title: title,
             completionDate: completionDate,
             projectDescription: description,
+            about: about,
+            details: details,
             userId: req.user.id
         });
 
         if(portfolio){
-            for(let i = 0; i < images.length; i++){
-                await Image.create({
-                    data: images[i],
-                    portfolioId: portfolio.id,
-                    userId: portfolio.userId
+            try {
+                for(let i = 0; i < images.length; i++){
+                    const random = generate();
+                
+                    const result = await uploadImage(images[i], `${title}_${random}`);
+                    await Image.create({
+                        data: result.secure_url,
+                        portfolioId: portfolio.id,
+                        userId: portfolio.userId
+                    });
+                    
+                }
+            } catch (error) {
+                console.log(error);
+                res.status(200).json({
+                    success: true,
+                    message: 'Could not upload Images'
                 });
+                return
             }
+           
              
-            for(let i = 0; i < skills.length; i++){
-                await Skill.create({
-                    title: skills[i],
-                    portfolioId: portfolio.id,
-                    userId: portfolio.userId
-                });
-            }
+            await Skill.create({
+                title: skills,
+                portfolioId: portfolio.id,
+                userId: portfolio.userId
+            });
         }
 
         res.status(200).json({
             success: true,
-            message: 'Portfolio created successfully'
-        })
+            message: 'Portfolio created successfully',
+            data: portfolio
+        });
+        
     } catch (error) {
         res.status(200).json({
             success: true,
@@ -129,4 +174,9 @@ exports.updateUserInfo = async (req, res) => {
             message: error
         });
     }
+}
+
+const generate = () => {
+    let x = Math.floor((Math.random() * 1000) + 1);
+    return x;
 }
