@@ -1,11 +1,40 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import arrowUp from '../assets/arrow-up.jpg'
 import pencil from '../assets/pencil.png'
 import chair2 from '../assets/chair2.png'
+import axios from 'axios'
+
 
 
 
 function Preview() {
+  const [portfolio, setPortfolio] = useState({});
+
+  useEffect(() => {
+    document.title = 'preview';
+
+  
+    let id = sessionStorage.getItem("portfolioId")
+    const headers = {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${sessionStorage.getItem("token")}`
+    };
+    
+    axios.get( `https://handy-hire.onrender.com/api/v1/portfolio/${id}`, {headers})
+    .then(function (response) {
+      
+      if(response.data.success === true){
+        console.log(response.data);
+        setPortfolio(response.data.data)
+       console.log(portfolio)
+      }
+
+    }).catch((err) => console.log(err));
+    
+
+  },[]);
+
+
   return (
     <>
     <span><strong><h2 class="" style={{padding: "2rem 0 0 2rem"}}>Portfolio</h2></strong></span>

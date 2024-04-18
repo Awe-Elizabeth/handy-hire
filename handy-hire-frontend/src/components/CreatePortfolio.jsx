@@ -3,6 +3,7 @@ import arrowUp from '../assets/arrow-up.jpg'
 import pencil from '../assets/pencil.png'
 import UserContext from '../context/userContex';
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom';
 
 
 function CreatePortfolio() {
@@ -13,6 +14,7 @@ function CreatePortfolio() {
   const [about, setAbout] = useState('');
   const [hireDetail, setHireDetails] = useState('');
   const imageArray = []
+  const navigate = useNavigate();
 
 
 
@@ -43,6 +45,9 @@ function CreatePortfolio() {
       if(response.data.success === true){
         //status = true
         console.log(response.data)
+        console.log(response.data.data.id);
+        sessionStorage.setItem("portfolioId", response.data.data.id)
+        navigate('/preview')
       }
 
     }).catch((err) => console.log(err));
