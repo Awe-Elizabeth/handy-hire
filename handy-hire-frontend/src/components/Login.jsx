@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext} from 'react'
 import handylogo from '../assets/handylogo.jpg';
 import handyicon3 from '../assets/handyicon3.jpg';
 import google_symbol from '../assets/google_symbol.png.png'
@@ -6,14 +6,18 @@ import facebook_symbol from '../assets/facebook_symbol.png.png'
 import profile from '../assets/profile.png'
 import shield from '../assets/shield.png'
 import { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 import axios from 'axios'
+import UserContext from '../context/userContex';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [display, setErrDisplay] = useState('none');
   const [invalid, setInvalid] = useState('none')
+  const navigate = useNavigate();
 
+  const {setUser, user} = useContext(UserContext);
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -33,8 +37,12 @@ function Login() {
       if (response.status == 404){
           setInvalid('block')
       }else if (response.data.success === true){
-          localStorage.setItem('token', response.data.token);
-          //navigate("/login");
+        sessionStorage.setItem('token', response.data.token);
+        sessionStorage.setItem('firstName', response.data.result.firstName);
+        sessionStorage.setItem('lastName', response.data.result.lastName);
+        sessionStorage.setItem('id', response.data.result.userid);
+          setUser({id: response.data.result.userid, firstName: response.data.result.firstName, lastName: response.data.result.lastName, role: response.data.result.role});
+          navigate("/dashboard");
       }else if(response.status == 403){
         setErrDisplay('block');
       }
@@ -78,7 +86,7 @@ function Login() {
               <img src={profile} alt="" style={{width: '70%', height: '100%', objectFit: 'fill'}}/>
               </div>
               
-              <input type="text"  
+              <input  type="text"  
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -104,7 +112,7 @@ function Login() {
               <p>Forgot password?</p>
             </span>
             <br />
-            <button type='submit'>Signup</button>
+            <button type='submit'>Login</button>
             </form>
             <div className="last_div">
               <h6>Or continue with</h6>

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import handyimg from '../assets/handyimg.jpg'
 import handyicon3 from '../assets/handyicon3.jpg'
 import handyicon2 from '../assets/handyicon2.jpg'
@@ -16,12 +16,39 @@ function Register() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [country, setCountry] = useState('');
+  const [state, setState] = useState('');
+  const [categories, setCategories] = useState([]);
+  const [category, setCategory] = useState('');
   const [logo, setLogo] = useState(handyicon3);
   const [agree, setAgree] = useState(false)
   const [errDisplay, setErrDisplay] = useState('none');
   const navigate = useNavigate();
 
   const {setUser, user} = useContext(UserContext);
+
+  useEffect(() => {
+    document.title = 'Register';
+
+    let length;
+    const headers = {
+      'Content-Type': 'application/json',
+    };
+    
+    axios.get( 'https://handy-hire.onrender.com/api/v1/categories', {headers})
+    .then(function (response) {
+      
+      if(response.data.success === true){
+        setCategories(response.data.data)
+        length = categories.length
+        console.log(response.data.data) 
+      }
+
+    }).catch((err) => console.log(err));
+    
+
+  },[length]);
+
+  
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -44,9 +71,10 @@ function Register() {
       console.log(response.data) 
       if(response.data.success === true){
         console.log(response.data.result);
-        localStorage.setItem('token', response.data.token);
-        localStorage.setItem('firstName', response.data.result.firstName);
-        localStorage.setItem('lastName', response.data.result.lastName);
+        sessionStorage.setItem('token', response.data.token);
+        sessionStorage.setItem('firstName', response.data.result.firstName);
+        sessionStorage.setItem('lastName', response.data.result.lastName);
+        sessionStorage.setItem('id', response.data.result.userid);
         setUser({id: response.data.result.userid, firstName: response.data.result.firstName, lastName: response.data.result.lastName, role: response.data.result.role});
         navigate("/dashboard");
       }
@@ -62,8 +90,12 @@ function Register() {
     email: email,
     password: password,
     role: user.role,
-    location: country
+    state: state,
+    country: country,
+    category: category
   }
+
+
 
   return (
       <div className="d-flex create_account_page">
@@ -98,12 +130,36 @@ function Register() {
              value={password}
              onChange={(e) => setPassword(e.target.value)}
             />
+            <label htmlFor="State">State</label>
+            <input type="text"
+            required
+             value={state}
+             onChange={(e) => setState(e.target.value)} 
+            />
             <label htmlFor="Country">Country</label>
             <input type="text"
             required
              value={country}
              onChange={(e) => setCountry(e.target.value)} 
             />
+
+            <label htmlFor="Category">Select a Category</label>
+            <select className='input' id="categories" name="categories"
+            value={category} 
+            onChange={e => setCategory(e.target.value)} 
+            >
+            <option value=""></option>
+            {          
+            categories.map((category, index) => {
+                    return(
+                      (
+                        <option key={index} value={category.id}
+                        >{category.name}</option>
+                      ))
+                    
+                  })
+                }
+            </select>
           
           <p className="form_text">
             <img src={logo} 

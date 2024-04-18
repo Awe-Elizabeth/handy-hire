@@ -11,6 +11,10 @@ import Portfolio from './components/Portfolio'
 import Profile from './components/Profile'
 import ProfiledIt from './components/ProfiledIt'
 import { UserContextProvider } from './context/UserContextProvider'
+import CreatePortfolio from './components/CreatePortfolio'
+import PortfolioBrief from './components/PortfolioBrief'
+import Preview from './components/Preview'
+import Settings from './components/Settings'
 // import Layout from './Layout.jsx'
 
 function App() {
@@ -27,6 +31,10 @@ function App() {
      <Route path="/portfolio" element={<Portfolio />} />
      <Route path="/profile" element={<Profile />} />
      <Route path="/profiledit" element={<ProfiledIt />} />
+     <Route path="/createportfolio" element={<CreatePortfolio />} />
+     <Route path="/portfoliobrief" element={<PortfolioBrief />} />
+     <Route path="/preview" element={<Preview />} />
+     <Route path="/settings" element={<Settings />} />
      </Routes>
     </UserContextProvider>
      

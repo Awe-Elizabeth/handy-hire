@@ -6,6 +6,7 @@ const modelCon = require('./config/modelCon');
 const dotenv = require('dotenv');
 const db = require('./models');
 const seed = require('./seeders/category.seeder');
+const nodemailer = require('nodemailer');
 dotenv.config()
 
 
@@ -20,8 +21,8 @@ const categoryRoutes = require('./routes/category.router');
 
 
 
-app.use(express.json())
-app.use(express.urlencoded({extended: false}))
+app.use(express.json({limit: '2mb'}))
+app.use(express.urlencoded({extended: false, limit: '2mb'}))
 app.use(cors())
 
 

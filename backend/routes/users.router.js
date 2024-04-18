@@ -3,9 +3,9 @@ const { getUsers, updateUserInfo, getUsersbylocation, getUsersById } = require('
 const protect = require('../middlewares/protect');
 const router = express.Router()
 
-router.get('/', getUsers);
-router.get('/:id', getUsersById);
-router.post('/getusersbylocation', getUsersbylocation);
+router.get('/', protect, getUsers);
+router.get('/:id',protect, getUsersById);
+router.post('/getusersbylocation', protect, getUsersbylocation);
 router.post('/updateuser', protect, updateUserInfo);
 
 
