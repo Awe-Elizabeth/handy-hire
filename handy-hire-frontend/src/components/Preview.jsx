@@ -3,12 +3,17 @@ import arrowUp from '../assets/arrow-up.jpg'
 import pencil from '../assets/pencil.png'
 import chair2 from '../assets/chair2.png'
 import axios from 'axios'
+import{Link, useNavigate} from 'react-router-dom'
+import Dashboard from './Dashboard'
+
 
 
 
 
 function Preview() {
   const [portfolio, setPortfolio] = useState({});
+  const [skills, setSkills] = useState([]);
+  const [images, setImages] = useState([]);
 
   useEffect(() => {
     document.title = 'preview';
@@ -25,7 +30,9 @@ function Preview() {
       
       if(response.data.success === true){
         console.log(response.data);
-        setPortfolio(response.data.data)
+        setPortfolio(response.data.data);
+        setSkills(response.data.data.skills);
+        setImages(response.data.data.images);
        console.log(portfolio)
       }
 
@@ -54,26 +61,66 @@ function Preview() {
             <h2 ><strong>Preview</strong></h2>
             <span style={{width: "80%"}}><h5>Title</h5>  <div class="button"><img src={pencil} alt="#"/><button>Edit Profile</button></div>
             </span>
-          <span style={{width: "80%"}}>  <p>Carpenter</p> <div class="button"><img src={pencil} alt="#"/><button>Edit Profile</button></div>
+          <span style={{width: "80%"}}>  <p>{portfolio.title}</p> <div class="button"><img src={pencil} alt="#"/><button>Edit Profile</button></div>
           </span>
-          <img src={chair2} alt="" width="600px"/>
+          <div style={{display: "flex", flexWrap: "wrap"}}>
+          {
+              images.map((image, index) => {
+                return(
+                  (
+                    <div style={{width: "200px", height: "200px", margin: "10px"}}>
+                        <img src={image} alt="" style={{width:"100%", height: "100%", objectFit:"cover"}}/>
+                    </div> 
+                  )
+                ) 
+              })
+            }
+          </div>
+          
+          
             <h5 class="mt-4">Skills</h5>
-            <span style={{width: "80%"}}><p>communication Skill</p> <div class="button"><img src={pencil} alt="#"/><button>Edit Profile</button></div>
+            <span style={{width: "80%"}}>   
+            {
+              skills.map((skill, index) => {
+                return(
+                  (
+                    <p>{skill}</p> 
+                  )
+                ) 
+              })
+            }
+             
+              
+              <div class="button"><img src={pencil} alt="#"/><button>Edit Profile</button></div>
             </span>
+            
+           
             <h5 class="mt-4">About</h5>
-            <span style={{width: "80%"}}><textarea name="" id="" cols="70" rows="5">Brief Bio about yourself</textarea><br/>
+            <span style={{width: "80%"}}><textarea name="" id="" cols="70" rows="5"
+            value={portfolio.about}
+            disabled={true}
+            >Brief Bio about yourself</textarea><br/>
               <div class="button btn"><img src={pencil} alt="#"/><button>Edit Profile</button></div>
               </span>
             <h5 class="mt-4">Why you should hire me?</h5>
-           <span style={{width: "80%"}}> <textarea name="" id="" cols="70" rows="5">Write the reason why you should be hired</textarea><br/>
+           <span style={{width: "80%"}}> <textarea name="" id="" cols="70" rows="5"
+           value={portfolio.details}
+           disabled={true}
+           ></textarea><br/>
             <div class="button btn"><img src={pencil} alt="#"/><button>Edit Profile</button></div>
             </span> 
             <h5 class="mt-4">Project Description</h5>
-           <span style={{width: "80%"}}><textarea name="" id="" cols="70" rows="5">Describe what you did on the project</textarea><br/>
+           <span style={{width: "80%"}}><textarea name="" id="" cols="70" rows="5"
+           value={portfolio.projectDescription}
+           disabled={true}
+           ></textarea><br/>
             <div class="button btn"><img src={pencil} alt="#"/><button>Edit Profile</button></div>
             </span>
-           <span><button class="btn1">Back</button> <button class="btn2">Publish</button></span>
-          
+           <span><button class="btn1">Back</button>
+           <Link to={'/dashboard'}>
+           <button class="btn2">Publish</button>
+           </Link>
+           </span>      
           </div>
     </section>
     </>
