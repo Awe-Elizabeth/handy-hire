@@ -88,7 +88,7 @@ exports.getPortfoliosByCategoryId = async(req, res) => {
 
         res.status(200).json({
             success: true,
-            data: results
+            resultData: results
         });
     } catch (error) {
         res.status(200).json({

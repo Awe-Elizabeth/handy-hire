@@ -37,6 +37,7 @@ import { Link } from 'react-router-dom'
 
 function Dashboard() {
   const [categories, setCategories] = useState([]);
+  const [userData, setUserData] = useState([]);
   const [activeId, setActiveId] = useState('');
   const {setUser, user} = useContext(UserContext);
   var firstName = sessionStorage.getItem("firstName");
@@ -73,6 +74,21 @@ function Dashboard() {
 
     const handleDivClick = (id) => {
       setActiveId(id)
+
+      const headers = {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${sessionStorage.getItem("token")}`
+      };
+      
+      axios.get( `https://handy-hire.onrender.com/api/v1/portfolio/getbycategory/${id}`, {headers})
+      .then(function (response) {
+        console.log(response);
+        if(response.data.success === true){
+          setUserData(response.data.data)
+          console.log(response.data.data) 
+        }
+  
+      }).catch((err) => console.log(err));
     }
 
   
