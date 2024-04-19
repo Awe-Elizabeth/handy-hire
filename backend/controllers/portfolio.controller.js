@@ -77,11 +77,35 @@ exports.getPortfoliosById = async(req, res) => {
 
 }
 
+exports.getPortfoliosByCategoryId = async(req, res) => {
+   
+    
+    try {
+        const [results, metadata] = await db.sequelize.query(`
+        select Portfolios.id, Portfolios.defaultImage, Portfolios.details, Users.firstName from Portfolios inner join Users on Users.userid = Portfolios.userId  where Users.CategoryId = "${req.params.id}" group by Users.userid;
+    `)       
+
+
+        res.status(200).json({
+            success: true,
+            data: results
+        });
+    } catch (error) {
+        res.status(200).json({
+            success: true,
+            message: "An Error occured",
+            data: error
+        });
+        console.log(error)
+    }
+
+}
+
 exports.createPortfolio = async(req, res) => {
     try {
         const {title, completionDate, images, videos, skills, description, about, details} = req.body
-
-        console.log(req.user.id);
+        let defaultImage;
+        let imagesArr = [];
         const portfolio = await  Portfolio.create({
             title: title,
             completionDate: completionDate,
@@ -90,6 +114,7 @@ exports.createPortfolio = async(req, res) => {
             details: details,
             userId: req.user.id
         });
+        
 
         if(portfolio){
             try {
@@ -102,7 +127,8 @@ exports.createPortfolio = async(req, res) => {
                         portfolioId: portfolio.id,
                         userId: portfolio.userId
                     });
-                    
+
+                    imagesArr.push(result.secure_url)   
                 }
             } catch (error) {
                 console.log(error);
@@ -112,6 +138,14 @@ exports.createPortfolio = async(req, res) => {
                 });
                 return
             }
+
+            await Portfolio.update({
+                defaultImage: imagesArr[0]
+            },{
+                where:{
+                    id: portfolio.id
+                }
+            })
            
              
             await Skill.create({
