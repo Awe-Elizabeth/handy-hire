@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import handylogo from '../assets/handylogo.jpg'
 import arrowRight from '../assets/arrow-right.png'
 import search from '../assets/search.png'
@@ -13,8 +13,39 @@ import ratings from '../assets/Ratings.png'
 import chair2 from '../assets/chair2.png'
 import cupboard from '../assets/cupboard.png'
 import board from '../assets/board.png'
+import axios from 'axios'
 
 function DashboardInfo() {
+    let firstName = sessionStorage.getItem("firstName");
+    let lasName = sessionStorage.getItem("lastName");
+    const [portfolio, setPortfolio] = useState([]);
+    const [images, setImages] = useState([]);
+
+    useEffect(() => {
+        document.title = 'preview';
+    
+        let id = sessionStorage.getItem("portfolioId")
+        const headers = {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${sessionStorage.getItem("token")}`
+        };
+        
+        axios.get( `https://handy-hire.onrender.com/api/v1/portfolio/${id}`, {headers})
+        .then(function (response) {
+          
+          if(response.data.success === true){
+            console.log(response.data);
+            setPortfolio(response.data.data);
+            //setSkills(response.data.data.skills);
+            setImages(response.data.data.images);
+           console.log(portfolio)
+          }
+    
+        }).catch((err) => console.log(err));
+        
+    
+      },[]);
+
   return (
     <>
     <div>
@@ -25,7 +56,7 @@ function DashboardInfo() {
             </div>
             <div className="header_icons">
                 <div className="search_bar">  <img src={search} alt="search" style={{width:"25px", height:"25px"}} className="p-1"/> <p className="mr-2">What service are you looking for?</p></div>
-                <div className="header_img"> <img src={faq} alt="#" width="50px" height="50px"/> <img src={notification} alt="" style={{width:"50px", height:"50px"}}/> <span><img src={mary} alt=""/> <strong>Mary Maxwell</strong><img src={arrowDown} alt=""/></span></div>
+                <div className="header_img"> <img src={faq} alt="#" width="50px" height="50px"/> <img src={notification} alt="" style={{width:"50px", height:"50px"}}/> <span><img src={mary} alt=""/> <strong>{firstName} {lasName}</strong><img src={arrowDown} alt=""/></span></div>
             </div>
            
         </header>
@@ -47,10 +78,22 @@ function DashboardInfo() {
             <img src={chair} alt="" className="img"/>
             <p style={{margin: "2rem 0 0 1rem"}}><strong>My Portfolio</strong></p>
             <div className="info_img d-flex">
-                <img src={chair} alt=""/>
+                {
+                    images.map((image, index) => {
+                        return(
+                            (
+                                <div style={{height: "150px", width: "200px", margin: "5px"}}>
+                                    <img src={image} alt="" style={{width: "100%", height: "100%"}}/>
+                                </div>
+                                
+                            )
+                        )
+                    })
+                }
+                {/* <img src={chair} alt=""/>
                 <img src={chair2} alt=""/>
                 <img src={cupboard} alt=""/>
-                <img src={board} alt=""/>
+                <img src={board} alt=""/> */}
             </div>
             <p style={{marginLeft: "1rem"}}>See Projects (3) <img src={arrowRight} alt="" style={{marginLeft: "1rem"}}/></p>
             <span className="d-flex" style={{justifyContent: "space-between"}}><p><strong>What people loved about the artisan
@@ -68,8 +111,7 @@ function DashboardInfo() {
          </div>
           <div className="info_text">
             <h5 style={{textAalign: "center"}}>About</h5>
-            <p> I’m a skilled carpenter with a passion for creating beautiful and functional furniture, from crafting chairs that provide comfort and style, to building wardrobes that maximize storage spaces, I love bringing wood to life. With years of experience and attention to detail, I take pride in delivering
-                 top-notch craftmanship. Let’s turn your furniture into reality!</p>
+            <p> {portfolio.about}</p>
 
                  <h5 style={{textAalign: "center"}}>Why You should Hire me</h5>
                  <p>I bring expertise and craftmanship
@@ -81,11 +123,15 @@ function DashboardInfo() {
                     I provide professional work and furniture that will stand the test of time,
                     </p>
                     <h5 style={{textAalign: "center"}}>Short description about the service i provide</h5>
-                    <ul>
+                    <p>
+                        {portfolio.projectDescription}
+                        {/* <ul>
                         <li>Custom made furniture pieces</li>
                         <li> Repair and restoration services</li>
                         <li>  Installation of fitting doors, cabinets and windows</li>
-                    </ul>
+                    </ul> */}
+                    </p>
+                    
 
           </div>
 

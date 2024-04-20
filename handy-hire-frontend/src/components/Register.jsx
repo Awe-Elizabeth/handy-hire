@@ -92,7 +92,7 @@ function Register() {
     role: user.role,
     state: state,
     country: country,
-    category: category
+    categoryId: category
   }
 
 

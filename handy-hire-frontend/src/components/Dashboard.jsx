@@ -32,7 +32,7 @@ import dish from '../assets/dish.png'
 import electrician from '../assets/electrician.png'
 import axios from 'axios'
 import UserContext from '../context/userContex'
-import { Link } from 'react-router-dom'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
 
 
 function Dashboard() {
@@ -42,6 +42,10 @@ function Dashboard() {
   const {setUser, user} = useContext(UserContext);
   var firstName = sessionStorage.getItem("firstName");
   var lastName = sessionStorage.getItem("lastName");
+  const navigate = useNavigate();
+
+
+  const listItems = []
   
   
     useEffect(() => {
@@ -84,13 +88,22 @@ function Dashboard() {
       .then(function (response) {
         console.log(response);
         if(response.data.success === true){
-          setUserData(response.data.data)
-          console.log(response.data.data) 
+          setUserData(response.data.resultData)
+          console.log(response.data.resultData) 
         }
   
       }).catch((err) => console.log(err));
+     
     }
 
+    const handlePortfolioClick = (id) => {
+    
+      sessionStorage.setItem("portfolioId", id);
+      
+      navigate('/dashboardinfo')
+    }
+
+  
   
 
 
@@ -158,17 +171,31 @@ function Dashboard() {
                     
                   })
                 }
-                {/* <div className="p-1 m-0" style={{backgroundColor: "#4862BE"}}><p>Construction</p></div> */}
-                
-               {/* <div><span><p>Manufacturing </p></span></div>
-                <div><span><p>Food Services and Hospitality</p></span></div>
-                <div><p>  Janitorial and Cleaning Services</p></div>
-                <div><p>  Baking</p></div>
-                <div><p>  painting</p></div> */}
                
                </div>
+
                <div>
-                <div className="card cards">
+                  {
+                    userData.map((data, index) => {
+                      return(
+                        (
+                          <div className="card cards"
+                          onClick={() => handlePortfolioClick(data.id)}
+                          >
+                        <img src={data.defaultImage} className="card-img-top" alt="..." style={{height: "200px"}}/>
+                        <div className="card-body">
+                          <h5 className="card-title"><img src={tunde} alt=""/>{data.firstName}</h5>
+                          <p className="card-text" style={{width: "250px"}}>{data.details} 
+                          </p>
+                        
+                        </div>
+                        
+                      </div> 
+                        )
+                      )
+                    })
+                  }
+                {/* <div className="card cards">
                   <img src={chair} className="card-img-top" alt="..." style={{height: "200px"}}/>
                   <div className="card-body">
                     <h5 className="card-title"><img src={tunde} alt=""/>Tunde</h5>
@@ -176,7 +203,7 @@ function Dashboard() {
                      </p>
                    
                   </div>
-                </div>
+                </div> */}
                </div>
                <div className="card cards">
                 <img src={electrician} className="card-img-top" alt="..."  style={{height: "200px"}}/>
@@ -190,6 +217,8 @@ function Dashboard() {
           </div>
           
     </section>
+
+
         <div className="popular">
           <h4><strong>Most Popular Categories</strong></h4>
           <span>Show All <img src={image13} alt=""/><img src={arrowRight} alt=""/></span>
