@@ -34,7 +34,11 @@ exports.getPortfoliosById = async(req, res) => {
     
     try {
         const [results, metadata] = await db.sequelize.query(`
-        select Portfolios.id, Portfolios.title, Portfolios.projectDescription, Portfolios.about, Portfolios.details, Images.data, Skills.title as skills from ((Portfolios INNER JOIN Images ON Images.portfolioId = Portfolios.id) inner join Skills on Skills.portfolioId = Portfolios.id) where Images.portfolioId ="${req.params.id}" and Skills.portfolioId = "${req.params.id}"
+        select Portfolios.id, Portfolios.title, Portfolios.projectDescription, Portfolios.defaultImage, Portfolios.about, Portfolios.details, Images.data, Skills.title as skills, Users.firstName, Users.lastName from Portfolios
+         INNER JOIN Images ON Images.portfolioId = Portfolios.id
+        inner join Skills on Skills.portfolioId = Portfolios.id 
+        inner join Users on Users.userid = Portfolios.userId  
+        where portfolios.id = "${req.params.id}"
     `)       
      // console.log(req.params.id);
      
@@ -55,6 +59,9 @@ exports.getPortfoliosById = async(req, res) => {
         let responseData = {
             id: results[0].id,
             title: results[0].title,
+            firstName: results[0].firstName,
+            lastName: results[0].lastName,
+            defaultImage: results[0].defaultImage,
             projectDescription: results[0].projectDescription,
             about: results[0].about,
             details: results[0].details,
@@ -118,18 +125,21 @@ exports.createPortfolio = async(req, res) => {
 
         if(portfolio){
             try {
-                for(let i = 0; i < images.length; i++){
-                    const random = generate();
-                
-                    const result = await uploadImage(images[i], `${title}_${random}`);
-                    await Image.create({
-                        data: result.secure_url,
-                        portfolioId: portfolio.id,
-                        userId: portfolio.userId
-                    });
-
-                    imagesArr.push(result.secure_url)   
+                if(images){
+                    for(let i = 0; i < images.length; i++){
+                        const random = generate();
+                    
+                        const result = await uploadImage(images[i], `${title}_${random}`);
+                        await Image.create({
+                            data: result.secure_url,
+                            portfolioId: portfolio.id,
+                            userId: portfolio.userId
+                        });
+    
+                        imagesArr.push(result.secure_url)   
+                    }
                 }
+                
             } catch (error) {
                 console.log(error);
                 res.status(200).json({
@@ -147,12 +157,14 @@ exports.createPortfolio = async(req, res) => {
                 }
             })
            
-             
-            await Skill.create({
-                title: skills,
-                portfolioId: portfolio.id,
-                userId: portfolio.userId
-            });
+            if(skills){
+                await Skill.create({
+                    title: skills,
+                    portfolioId: portfolio.id,
+                    userId: portfolio.userId
+                });
+            }
+           
         }
 
         res.status(200).json({
