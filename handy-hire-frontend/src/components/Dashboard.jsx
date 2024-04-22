@@ -37,6 +37,7 @@ import { Link, Navigate, useNavigate } from 'react-router-dom'
 
 function Dashboard() {
   const [categories, setCategories] = useState([]);
+  const [portfolios, setPortfolios] = useState([]);
   const [userData, setUserData] = useState([]);
   const [activeId, setActiveId] = useState('');
   const {setUser, user} = useContext(UserContext);
@@ -54,6 +55,7 @@ function Dashboard() {
       let length;
       const headers = {
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${sessionStorage.getItem("token")}`
       };
       
       axios.get( 'https://handy-hire.onrender.com/api/v1/categories', {headers})
@@ -61,6 +63,17 @@ function Dashboard() {
         
         if(response.data.success === true){
           setCategories(response.data.data)
+          length = categories.length
+          console.log(response.data.data) 
+        }
+  
+      }).catch((err) => console.log(err));
+
+      axios.get( 'https://handy-hire.onrender.com/api/v1/portfolio', {headers})
+      .then(function (response) {
+        
+        if(response.data.success === true){
+          setPortfolios(response.data.data)
           length = categories.length
           console.log(response.data.data) 
         }
@@ -88,7 +101,7 @@ function Dashboard() {
       .then(function (response) {
         console.log(response);
         if(response.data.success === true){
-          setUserData(response.data.resultData)
+          setPortfolios(response.data.resultData)
           console.log(response.data.resultData) 
         }
   
@@ -175,7 +188,7 @@ function Dashboard() {
                </div>
 
                <div>
-                  {
+                  {/* {
                     userData.map((data, index) => {
                       return(
                         (
@@ -194,8 +207,8 @@ function Dashboard() {
                         )
                       )
                     })
-                  }
-                {/* <div className="card cards">
+                  } */}
+                <div className="card cards">
                   <img src={chair} className="card-img-top" alt="..." style={{height: "200px"}}/>
                   <div className="card-body">
                     <h5 className="card-title"><img src={tunde} alt=""/>Tunde</h5>
@@ -203,7 +216,7 @@ function Dashboard() {
                      </p>
                    
                   </div>
-                </div> */}
+                </div>
                </div>
                <div className="card cards">
                 <img src={electrician} className="card-img-top" alt="..."  style={{height: "200px"}}/>
@@ -224,6 +237,27 @@ function Dashboard() {
           <span>Show All <img src={image13} alt=""/><img src={arrowRight} alt=""/></span>
        </div>
        <div className="popular_categories d-flex">
+
+        {
+          portfolios.map((data, index) => {
+            return(
+              (
+                <div className="card cards"
+                onClick={() => handlePortfolioClick(data.id)}
+                >
+              <img src={data.defaultImage} className="card-img-top" alt="..." style={{height: "200px"}}/>
+              <div className="card-body">
+                <h5 className="card-title"><img src={mary} alt=""/>{data.firstName}</h5>
+                <p className="card-text" style={{width: "250px"}}>{data.details} 
+                </p>
+              
+              </div>
+              
+            </div> 
+              )
+            )
+          })
+        }
           <div className="card cards" style={{width: "270px"}}>
           <img src={rail} className="card-img-top" alt="..."  style={{height: "200px", width: "270px"}}/>
           <div className="card-body">
