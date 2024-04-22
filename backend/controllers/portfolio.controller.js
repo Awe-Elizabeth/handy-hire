@@ -39,7 +39,7 @@ exports.getPortfoliosById = async(req, res) => {
          INNER JOIN Images ON Images.portfolioId = Portfolios.id
         inner join Skills on Skills.portfolioId = Portfolios.id 
         inner join Users on Users.userid = Portfolios.userId  
-        where portfolios.id = "${req.params.id}"
+        where Portfolios.id = "${req.params.id}"
     `)       
      // console.log(req.params.id);
      

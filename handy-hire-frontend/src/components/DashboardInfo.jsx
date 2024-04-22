@@ -22,7 +22,7 @@ function DashboardInfo() {
     const [images, setImages] = useState([]);
 
     useEffect(() => {
-        document.title = 'preview';
+        document.title = 'dashboardinfo';
     
         let id = sessionStorage.getItem("portfolioId")
         const headers = {
@@ -78,7 +78,7 @@ function DashboardInfo() {
             <img src={chair} alt="" className="img"/>
             <p style={{margin: "2rem 0 0 1rem"}}><strong>My Portfolio</strong></p>
             <div className="info_img d-flex">
-                {
+                {/* {
                     images.map((image, index) => {
                         return(
                             (
@@ -89,7 +89,7 @@ function DashboardInfo() {
                             )
                         )
                     })
-                }
+                } */}
                 {/* <img src={chair} alt=""/>
                 <img src={chair2} alt=""/>
                 <img src={cupboard} alt=""/>
