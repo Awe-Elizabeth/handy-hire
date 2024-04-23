@@ -20,6 +20,8 @@ function DashboardInfo() {
     let lasName = sessionStorage.getItem("lastName");
     const [portfolio, setPortfolio] = useState([]);
     const [images, setImages] = useState([]);
+    const [dis, setDis] = useState('block');
+    const myId = sessionStorage.getItem("id");
 
     useEffect(() => {
         document.title = 'dashboardinfo';
@@ -36,9 +38,13 @@ function DashboardInfo() {
           if(response.data.success === true){
             console.log(response.data);
             setPortfolio(response.data.data);
+            if(response.data.data.userId === myId){
+                setDis('none');
+            }
+            console.log(response.data.data.userId)
             //setSkills(response.data.data.skills);
             setImages(response.data.data.images);
-           console.log(portfolio)
+        //    console.log(portfolio)
           }
     
         }).catch((err) => console.log(err));
@@ -67,18 +73,19 @@ function DashboardInfo() {
      </div>
 
      <div className="d-flex arrow_div_heading" style={{justifyContent: "space-between", width: "55%"}}>
-        <span className="d-flex"><img src={tunde} alt="" style={{width:"50px", height:"50px"}}/>
-            <h5 style={{margin: ".7rem .7rem"}}>Tunde O</h5></span>
+        <span className="d-flex"><img src={mary} alt="" style={{width:"50px", height:"50px"}}/>
+            <h5 style={{margin: ".7rem .7rem"}}>{portfolio.firstName} {portfolio.lastName}</h5></span>
             <img src={ratings} alt="" style={{width:"100px", height:"25px", marginTop: "1rem"}}/>
-        <button>Contact me</button>
+            <button style={{display: dis}}>Contact me</button>
+        
      </div>
 
      <section className="d-flex info_section">
          <div className="info_section_div">
-            <img src={chair} alt="" className="img"/>
+            <img src={portfolio.defaultImage} alt="" className="img"/>
             <p style={{margin: "2rem 0 0 1rem"}}><strong>My Portfolio</strong></p>
             <div className="info_img d-flex">
-                {/* {
+                {
                     images.map((image, index) => {
                         return(
                             (
@@ -89,7 +96,7 @@ function DashboardInfo() {
                             )
                         )
                     })
-                } */}
+                }
                 {/* <img src={chair} alt=""/>
                 <img src={chair2} alt=""/>
                 <img src={cupboard} alt=""/>

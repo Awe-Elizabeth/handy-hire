@@ -1,37 +1,40 @@
 import React from 'react'
 import arrowUp from '../assets/arrow-up.jpg'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
+
 
 function Settings() {
   return (
     <>
     <span
       ><strong
-        ><h2 class="" style={{padding: "2rem 0 0 2rem"}}>Settings</h2></strong
-      ></span
-    >
+        ><h2 className="" style={{padding: "2rem 0 0 2rem"}}>Settings</h2></strong></span>
     <span
-      class="arrow d-flex"
+      className="arrow d-flex"
       style={{justifyContent: "space-between", width: "40%"}}
     >
       <img src={arrowUp} alt="" style={{width:"20px", height:"20px"}} />
       <h4>Notification Settings</h4>
     </span>
 
-    <section class="preview_section">
-      <div class="preview_section_div">
-        <div class="prev" style={{padding: "0 0 0 2rem"}}>
+    <section className="preview_section">
+      <div className="preview_section_div">
+        <div className="prev" style={{padding: "0 0 0 2rem"}}>
           <h6>Password and Security</h6>
+          <Link to={'/billing'} style={{textDecoration: 'none', color: 'black'}}> 
           <h6>Billing and Payment</h6>
-          <button class="mt-4">Notifications</button>
+          </Link>
+          
+          <button className="mt-4">Notifications</button>
         </div>
        <div>
-        <div class="preview">
-          <div class="preview_div">
+        <div className="preview">
+          <div className="preview_div">
             <p>For important updates regarding your activity on HandyHire, some
               notification can not be disabled</p>
           </div>
 
-            <div class="preview_div1">
+            <div className="preview_div1">
               <span style={{width: "100%"}}
                 ><h6>Type</h6>
                 <h6>Email</h6></span
@@ -54,10 +57,10 @@ function Settings() {
               /></span>
             </div>
          </div>
-         <div class="notification">
+         <div className="notification">
           <h5 >REAL TIME NOTIFICATIONS</h5>
           <span
-          class="mt-4"><p>Enable/Disable Sound</p>
+          className="mt-4"><p>Enable/Disable Sound</p>
             <input type="range"
           /></span>
           <span
@@ -65,10 +68,9 @@ function Settings() {
             <input type="range"
           /></span>
          </div>
-         <button class="buttonn">save Changes</button>
+         <button className="buttonn">save Changes</button>
         </div>  
-      </div>
-     
+      </div>    
     </section>
     </>
   )
