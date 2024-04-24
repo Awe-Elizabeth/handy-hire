@@ -13,6 +13,8 @@ function CreatePortfolio() {
   const [description, setDescription] = useState('');
   const [about, setAbout] = useState('');
   const [hireDetail, setHireDetails] = useState('');
+  const [display, setDisplay] = useState('none');
+  const [err, setErr] = useState('none');
   const imageArray = []
   const navigate = useNavigate();
 
@@ -20,6 +22,11 @@ function CreatePortfolio() {
 
   const handleFileInputChange = (event) => {
     const file = event.target.files[0];
+    console.log(file.size)
+   if(file.size > 2097152){
+      setErr("block")
+      return
+   }
     const reader = new FileReader();
     reader.readAsDataURL(file);
 
@@ -33,7 +40,13 @@ function CreatePortfolio() {
 
   const submitPortfolio = () => {
 
+
     console.log(createPortfolioData);
+    if(image.length < 0 || skills == '' || description == '' ||about == '' || hireDetail == '' ){
+        setDisplay("block")
+        return;
+    }
+   
 
     const headers = {
       'Content-Type': 'application/json',
@@ -87,6 +100,7 @@ function CreatePortfolio() {
              onChange={handleFileInputChange}
              /></div>
             </p>
+            <p style={{ color: "red", fontSize: "1rem", display: err}}>File is too large, file must be not be larger than 2mb</p> 
             <h5 className="mt-4">Skills</h5>
             <input type="text" name="" id="" className="mt-3" placeholder="Enter skills"
             value={skills}
@@ -107,6 +121,8 @@ function CreatePortfolio() {
            value={description}
            onChange={(e) => setDescription(e.target.value)} 
            ></textarea><br/>
+          <p style={{ color: "red", fontSize: "1rem", display: display}}>All fields are required</p> 
+
            <span><button className="btn1">Cancel</button> <button className="btn2"
            onClick={submitPortfolio}
            >Continue</button></span>
