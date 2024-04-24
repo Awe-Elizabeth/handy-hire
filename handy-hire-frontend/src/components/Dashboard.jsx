@@ -265,7 +265,7 @@ function Dashboard() {
             )
           })
         }
-          <div className="card cards" style={{width: "270px"}}>
+          {/* <div className="card cards" style={{width: "270px"}}>
           <img src={rail} className="card-img-top" alt="..."  style={{height: "200px", width: "270px"}}/>
           <div className="card-body">
             <h5 className="card-title"><img src={mary} alt=""/>Kate</h5>
@@ -296,7 +296,7 @@ function Dashboard() {
               <p className="card-text" style={{width: "320px"}}>I create chairs according to custom specifications or designs,</p>
              
             </div>
-          </div>
+          </div> */}
        </div>
         <div className="popular">
           <h4><strong>Get Inspired by Work done on HandyHire</strong></h4>
