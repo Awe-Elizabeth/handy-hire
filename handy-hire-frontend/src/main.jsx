@@ -14,6 +14,14 @@ import './sass/createportfolio.scss'
 import './sass/preview.scss'
 import './sass/brief.scss'
 import './sass/settings.scss'
+import './sass/spinner.scss'
+import './sass/addresses.scss'
+import './sass/admin-trans.scss'
+import './sass/jobs.scss'
+import './sass/messages.scss'
+import './sass/payment.scss'
+import './sass/users.scss'
+
 
 import { BrowserRouter } from 'react-router-dom'
 

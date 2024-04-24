@@ -1,0 +1,19 @@
+form input{
+    width: 60%; 
+    display: block;
+    margin-bottom: 1rem;
+    border-radius: 7px;
+    border: 1px solid rgb(57, 57, 59);
+    padding: 8px;
+ }
+ button{
+ background-color: #4862be;
+ border: none;
+ border-radius: 7px;
+ color: white;
+ width: 60%;
+ padding: .5rem;
+ }
+ input::placeholder{
+   color: blue;
+ }

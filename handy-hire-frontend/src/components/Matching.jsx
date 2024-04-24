@@ -1,6 +1,7 @@
 import React from 'react'
 import handylogo from '../assets/handylogo.jpg'
 import arrowUp from '../assets/arrow-up.jpg'
+import { Link } from 'react-router-dom'
 
 function Matching() {
   return (
@@ -58,7 +59,12 @@ function Matching() {
           <input type="date" name="" id="" />
 
           <span>
-            <div className="button"><button className="button_one">cancel</button><button className="button_two">Schedule</button></div> 
+            <div className="button">
+              <Link to={'/dashboard'}>
+              <button className="button_one">cancel</button></Link>
+              <Link to={'/dashboard'}><button className="button_two">Schedule</button></Link>
+              
+              </div> 
             </span> 
          </article>
         
