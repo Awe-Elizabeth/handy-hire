@@ -21,6 +21,7 @@ import './sass/jobs.scss'
 import './sass/messages.scss'
 import './sass/payment.scss'
 import './sass/users.scss'
+import './sass/landingpage.scss'
 
 
 import { BrowserRouter } from 'react-router-dom'

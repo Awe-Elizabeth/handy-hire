@@ -115,6 +115,9 @@ exports.createPortfolio = async(req, res) => {
         const {title, completionDate, images, videos, skills, description, about, details} = req.body
         let defaultImage;
         let imagesArr = [];
+        let err ='';
+
+        
         const portfolio = await  Portfolio.create({
             title: title,
             completionDate: completionDate,

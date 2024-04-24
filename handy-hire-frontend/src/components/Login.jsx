@@ -9,12 +9,14 @@ import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios'
 import UserContext from '../context/userContex';
+import Spinner from './Spinner';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [display, setErrDisplay] = useState('none');
-  const [invalid, setInvalid] = useState('none')
+  const [invalid, setInvalid] = useState('none');
+  const [spin, setSpin] = useState('none')
   const navigate = useNavigate();
 
   const {setUser, user} = useContext(UserContext);
@@ -23,7 +25,7 @@ function Login() {
     e.preventDefault()
     console.log(loginData)
 
-
+    setSpin('flex')
     const headers = {
       'Content-Type': 'application/json',
     };
@@ -113,6 +115,7 @@ function Login() {
               <p>Forgot password?</p>
             </span>
             <br />
+            <Spinner display={spin}/>
             <button type='submit'>Login</button>
             </form>
             <div className="last_div">

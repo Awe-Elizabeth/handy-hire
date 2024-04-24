@@ -25,6 +25,8 @@ import ForgotPassword from './components/ForgotPassword'
 import Billing from './components/Billing'
 import AdminTransaction from './components/AdminTransaction'
 import Addresses from './components/Addresses'
+import Transaction from './components/Transaction'
+import Successful from './components/Successful'
 // import Layout from './Layout.jsx'
 
 function App() {
@@ -56,6 +58,9 @@ function App() {
      <Route path="/billing" element={<Billing />} />
      <Route path="/admin" element={<AdminTransaction />} />
      <Route path="/addresses" element={<Addresses />} />
+     <Route path="/transaction" element={<Transaction />} />
+     <Route path="/success" element={<Successful />} />
+
      </Routes>
     </UserContextProvider>
      
