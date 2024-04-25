@@ -150,8 +150,10 @@ function Dashboard() {
                 <Link to={'/help'} style={{textDecoration: 'none', color: 'black'}}> 
                     <div className="side_bar"><span><img src={support} alt="" className="img"/><p>Help Center </p></span><img src={arrowRight} alt="" className="images"/></div>
                 </Link>
+                <Link to={'/login'} style={{textDecoration: 'none', color: 'black'}}>
+                <div className="side_bar" onClick={() => {sessionStorage.clear()}}><span><img src={logout} alt="" className="imgs"/><p>Logout </p></span><img src={arrowRight} alt="" className="images"/></div>
+                </Link>
                 
-                <div className="side_bar"><span><img src={logout} alt="" className="imgs"/><p>Logout </p></span><img src={arrowRight} alt="" className="images"/></div>
             </div>
          
            <div className="Dashboard">
@@ -159,13 +161,13 @@ function Dashboard() {
             <div className="Dashboard_header">
                 <span><h4>RECOMMENDED FOR YOU</h4>
                     <h6>Get matched with an artisan</h6>
-                <button className="button_one">Create a brief</button></span>
+                    <Link to={'/matching'}><button className="button_one">Create a brief</button></Link>
+                  </span>
                 <span>
                     <h4>CLIENT RECOMMENDATION</h4>
                     <h6>Tailor HandyHire to your needs.</h6>
-                    <Link to={'/matching'}>
                     <button className="button_one">Add your info</button>
-                    </Link>
+                    
                    
                 </span>
             </div>
