@@ -4,6 +4,7 @@ import logos from '../assets/logos.png'
 
 function LandingPage() {
   return (
+    <body className='body'>
     <div className="landingpage">
     <div>
        <img src={logos} alt="" style={{width:"300px"}}/>
@@ -20,6 +21,10 @@ function LandingPage() {
    
     </div>
   </div>
+
+    </body>
+    
+    
   )
 }
 

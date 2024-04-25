@@ -3,7 +3,7 @@ import arrowUp from '../assets/arrow-up.jpg'
 import pencil from '../assets/pencil.png'
 import UserContext from '../context/userContex';
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 function CreatePortfolio() {
@@ -81,7 +81,8 @@ function CreatePortfolio() {
     <>
     <span><strong><h2 className="" style={{padding: "2rem 0 0 2rem"}}>Portfolio</h2></strong></span>
     <span className="arrow" style={{justifyContent: "space-between"}}>
-      <img src={arrowUp} alt="" style={{width:"20px", height:"20px"}} /></span><br/>
+      <Link to={'/portfoliobrief'}> <img src={arrowUp} alt="" style={{width:"20px", height:"20px"}} /></Link></span><br/>
+     
       
       <section className="port_section">
         

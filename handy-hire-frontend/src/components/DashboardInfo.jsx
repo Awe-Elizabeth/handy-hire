@@ -121,13 +121,7 @@ function DashboardInfo() {
             <p> {portfolio.about}</p>
 
                  <h5 style={{textAalign: "center"}}>Why You should Hire me</h5>
-                 <p>I bring expertise and craftmanship
-
-                    I have the skill of transforming raw materials into functional aesthetically furniture pieces
-                    
-                    I construct custom -made pieces and i also repair and restore existing furniture.
-                    
-                    I provide professional work and furniture that will stand the test of time,
+                 <p>{portfolio.details}
                     </p>
                     <h5 style={{textAalign: "center"}}>Short description about the service i provide</h5>
                     <p>

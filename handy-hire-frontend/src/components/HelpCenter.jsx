@@ -42,16 +42,17 @@ function HelpCenter() {
 
     <section className="sections helpcenter">
         <div className="sections_div helpcenter_nav">
-                <div className="side_bar  m-0"><span className="d-flex"><img src={home} alt="" className="img"/><p>Home </p></span><img src={arrowRight} alt="" className="images"/></div>
-                <Link to={'/portfoliobrief'} style={{textDecoration: 'none', color: 'black'}}><div className="side_bar"><span><img src={portfolio} alt="" className="img"/><p>Portfolio </p></span><img src={arrowRight} alt="" className="images"/></div></Link>
-                <Link to={'/messages'} style={{textDecoration: 'none', color: 'black'}}><div className="side_bar"><span><img src={message} alt="" className="imgs"/><p>Messages</p></span> <img src={arrowRight} alt="" className="images"/></div></Link>
+          <Link Link to={'/dashboard'} style={{textDecoration: 'none', color: 'black'}}><div className="side_bar  m-0"><span className="d-flex"><img src={home} alt="" className="img"/><p>Home </p></span><img src={arrowRight} alt="" className="images"/></div></Link>
+          <Link to={'/portfoliobrief'} style={{textDecoration: 'none', color: 'black'}}><div className="side_bar"><span><img src={portfolio} alt="" className="img"/><p>Portfolio </p></span><img src={arrowRight} alt="" className="images"/></div></Link>
+          <Link to={'/messages'} style={{textDecoration: 'none', color: 'black'}}><div className="side_bar"><span><img src={message} alt="" className="imgs"/><p>Messages</p></span> <img src={arrowRight} alt="" className="images"/></div></Link>
 
-                <div className="side_bar"><span><img src={message} alt="" className="imgs"/><p>Reports</p></span> <img src={arrowRight} alt="" className="images"/></div>
-                
-                <div className="side_bar"><span><img src={listing} alt="" className="imgs"/><p>Listing</p></span> <img src={arrowRight} alt="" className="images"/></div>
-                <Link to={'/settings'} style={{textDecoration: 'none', color: 'black'}}>
-                <div className="side_bar" style={{marginTop: "4rem"}}><span><img src={setting} alt="" className="img"/><p>Settings</p></span><img src={arrowRight} alt="" className="images"/></div>
-                </Link>
+          <Link to={'/transaction'} style={{textDecoration: 'none', color: 'black'}}><div className="side_bar"><span><img src={message} alt="" className="imgs"/><p>Transaction</p></span> <img src={arrowRight} alt="" className="images"/></div></Link>
+          
+          
+          <div className="side_bar"><span><img src={listing} alt="" className="imgs"/><p>Listing</p></span> <img src={arrowRight} alt="" className="images"/></div>
+          <Link to={'/settings'} style={{textDecoration: 'none', color: 'black'}}>
+          <div className="side_bar" style={{marginTop: "4rem"}}><span><img src={setting} alt="" className="img"/><p>Settings</p></span><img src={arrowRight} alt="" className="images"/></div>
+          </Link>
           <div className="side_bar" style={{backgroundColor: "#4862BE"}}><span><img src={support} alt="" className="img"/><p>Help Center </p></span><img src={arrowRight} alt="" className="images"/></div>
                 <div className="side_bar"><span><img src={logout} alt="" className="imgs"/><p>Logout </p></span><img src={arrowRight} alt="" className="images"/></div>
         </div>

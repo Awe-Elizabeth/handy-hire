@@ -6,15 +6,17 @@ import facebook_symbol from '../assets/facebook_symbol.png.png'
 import profile from '../assets/profile.png'
 import shield from '../assets/shield.png'
 import { useState } from 'react';
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios'
 import UserContext from '../context/userContex';
+import Spinner from './Spinner';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [display, setErrDisplay] = useState('none');
-  const [invalid, setInvalid] = useState('none')
+  const [invalid, setInvalid] = useState('none');
+  const [spin, setSpin] = useState('none')
   const navigate = useNavigate();
 
   const {setUser, user} = useContext(UserContext);
@@ -23,7 +25,7 @@ function Login() {
     e.preventDefault()
     console.log(loginData)
 
-
+    setSpin('flex')
     const headers = {
       'Content-Type': 'application/json',
     };
@@ -110,9 +112,10 @@ function Login() {
               <p className="form_text2">
                 <img src={handyicon3} alt="icon" />Keep me logged in
               </p>
-              <p>Forgot password?</p>
+              <Link to={'/forgot-password'}><p>Forgot password?</p></Link>
             </span>
             <br />
+            <Spinner display={spin}/>
             <button type='submit'>Login</button>
             </form>
             <div className="last_div">
