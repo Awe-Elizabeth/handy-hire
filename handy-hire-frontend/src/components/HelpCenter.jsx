@@ -54,7 +54,9 @@ function HelpCenter() {
           <div className="side_bar" style={{marginTop: "4rem"}}><span><img src={setting} alt="" className="img"/><p>Settings</p></span><img src={arrowRight} alt="" className="images"/></div>
           </Link>
           <div className="side_bar" style={{backgroundColor: "#4862BE"}}><span><img src={support} alt="" className="img"/><p>Help Center </p></span><img src={arrowRight} alt="" className="images"/></div>
-                <div className="side_bar"><span><img src={logout} alt="" className="imgs"/><p>Logout </p></span><img src={arrowRight} alt="" className="images"/></div>
+          <Link to={'/login'} style={{textDecoration: 'none', color: 'black'}}>
+                <div className="side_bar" onClick={() => {sessionStorage.clear()}}><span><img src={logout} alt="" className="imgs"/><p>Logout </p></span><img src={arrowRight} alt="" className="images"/></div>
+          </Link>
         </div>
          
       <div className="Dashboard help">

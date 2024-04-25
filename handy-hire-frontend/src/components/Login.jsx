@@ -38,6 +38,7 @@ function Login() {
       console.log(response);
       if (response.status == 404){
           setInvalid('block')
+          setSpin('none')
       }else if (response.data.success === true){
         
         sessionStorage.setItem('token', response.data.token);
@@ -47,9 +48,10 @@ function Login() {
           setUser({id: response.data.result.userid, firstName: response.data.result.firstName, lastName: response.data.result.lastName, role: response.data.result.role});
           navigate("/dashboard");
       }else if(response.status == 403){
+        setSpin('none')
         setErrDisplay('block');
       }
-     
+      setSpin('none')
 
     }).catch((err) => console.log(err));
 

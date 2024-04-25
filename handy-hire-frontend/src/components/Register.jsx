@@ -89,6 +89,7 @@ function Register() {
         setUser({id: response.data.result.userid, firstName: response.data.result.firstName, lastName: response.data.result.lastName, role: response.data.result.role});
         navigate("/dashboard");
       }
+      setSpin('none')
 
     }).catch((err) => console.log(err));
 

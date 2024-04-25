@@ -14,6 +14,7 @@ import chair2 from '../assets/chair2.png'
 import cupboard from '../assets/cupboard.png'
 import board from '../assets/board.png'
 import axios from 'axios'
+import { Link, useNavigate } from 'react-router-dom'
 
 function DashboardInfo() {
     let firstName = sessionStorage.getItem("firstName");
@@ -21,6 +22,8 @@ function DashboardInfo() {
     const [portfolio, setPortfolio] = useState([]);
     const [images, setImages] = useState([]);
     const [dis, setDis] = useState('block');
+    const [callDisplay, setCallDisplay] = useState('none');
+    const navigate = useNavigate();
     const myId = sessionStorage.getItem("id");
 
     useEffect(() => {
@@ -76,7 +79,15 @@ function DashboardInfo() {
         <span className="d-flex"><img src={mary} alt="" style={{width:"50px", height:"50px"}}/>
             <h5 style={{margin: ".7rem .7rem"}}>{portfolio.firstName} {portfolio.lastName}</h5></span>
             <img src={ratings} alt="" style={{width:"100px", height:"25px", marginTop: "1rem"}}/>
-            <button style={{display: dis}}>Contact me</button>
+            <span>
+            <button className='contact' style={{display: dis}}
+            onClick={() => callDisplay === 'none'? setCallDisplay('block'): setCallDisplay('none')}
+            >Contact me</button>
+            <div className="call" style={{display: callDisplay}}>
+            <p onClick={() => navigate('/messages') } >Message</p>
+            <p className="">call </p> </div>
+            </span>
+            
         
      </div>
 
