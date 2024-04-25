@@ -13,14 +13,17 @@ function Settings() {
       className="arrow d-flex"
       style={{justifyContent: "space-between", width: "40%"}}
     >
-      <img src={arrowUp} alt="" style={{width:"20px", height:"20px"}} />
+      <Link to={'/dashboard'}><img src={arrowUp} alt="" style={{width:"20px", height:"20px"}} /></Link>
+      
       <h4>Notification Settings</h4>
     </span>
 
     <section className="preview_section">
       <div className="preview_section_div">
         <div className="prev" style={{padding: "0 0 0 2rem"}}>
-          <h6>Password and Security</h6>
+        <Link to={'/password'} style={{textDecoration: 'none', color: 'black'}}> 
+        <h6>Password and Security</h6>
+          </Link>         
           <Link to={'/billing'} style={{textDecoration: 'none', color: 'black'}}> 
           <h6>Billing and Payment</h6>
           </Link>

@@ -117,6 +117,50 @@ exports.forgotPassword = async (req, res) => {
         
         await forgotPasswordMail(email, req.headers.host, token);
 
+        res.status(200).json({
+            success: true,
+            result: _user
+        });
+        
+    } catch (error) {
+        console.log(error)
+        res.status(400).json({
+            success: false,
+            result: 'An error occurred'
+        });
+    }
+    
+}
+
+exports.resetPassword = async (req, res) => {
+    try {
+        const {email} = req.body
+
+        const user = await User.findOne({where: {email: email}});
+
+        if(!user){
+            res.status(400).json({
+                success: false,
+                message: 'user does not exist'
+            });
+            return;
+        }
+
+        // Generate a unique token
+        const token = crypto.randomBytes(20).toString('hex');
+
+        const _user = await User.update({
+           token : token,
+           tokenExp: new Date(Date.now()+20*60*1000)
+        },
+        {
+            where: {
+                userid: user.userid
+            }
+        });
+        
+        await forgotPasswordMail(email, req.headers.host, token);
+
         res.status(400).json({
             success: false,
             result: _user
