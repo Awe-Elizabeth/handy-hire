@@ -142,7 +142,7 @@ function Dashboard() {
                 <Link to={'/portfoliobrief'} style={{textDecoration: 'none', color: 'black'}}><div className="side_bar"><span><img src={portfolio} alt="" className="img"/><p>Portfolio </p></span><img src={arrowRight} alt="" className="images"/></div></Link>
                 
                 <div className="side_bar"><span><img src={message} alt="" className="imgs"/><p>Messages</p></span> <img src={arrowRight} alt="" className="images"/></div>
-                <div className="side_bar"><span><img src={message} alt="" className="imgs"/><p>Reports</p></span> <img src={arrowRight} alt="" className="images"/></div>
+                <div className="side_bar"><span><img src={message} alt="" className="imgs"/><p>Transactions</p></span> <img src={arrowRight} alt="" className="images"/></div>
                 <div className="side_bar"><span><img src={listing} alt="" className="imgs"/><p>Listing</p></span> <img src={arrowRight} alt="" className="images"/></div>
                 <div className="side_bar" style={{marginTop: "4rem"}}><span><img src={setting} alt="" className="img"/><p>Settings</p></span><img src={arrowRight} alt="" className="images"/></div>
                 <div className="side_bar"><span><img src={support} alt="" className="img"/><p>Help Center </p></span><img src={arrowRight} alt="" className="images"/></div>

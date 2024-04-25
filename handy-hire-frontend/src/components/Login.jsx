@@ -121,7 +121,7 @@ function Login() {
                 <img src={google_symbol} alt="#" />
                 <img src={facebook_symbol} alt="#" />
               </div>
-              <h6>Already have an Account? <a href="#">Login</a></h6>
+              <h6>Dont have an Account? <a href="#">Sign Up</a></h6>
             </div>
           </div>
         </div>
