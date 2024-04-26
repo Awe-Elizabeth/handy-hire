@@ -146,9 +146,9 @@ try {
         return res.json({message: "Not Verified"}) 
     }
 
-    res.render("index", { email: oldUser.email});
+    res.render("reset-password", { email: oldUser.email});
 } catch (error) {
-    
+    console.log(error)
 }
     
 }
