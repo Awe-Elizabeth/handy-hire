@@ -46,7 +46,12 @@ function Login() {
         sessionStorage.setItem('lastName', response.data.result.lastName);
         sessionStorage.setItem('id', response.data.result.userid);
           setUser({id: response.data.result.userid, firstName: response.data.result.firstName, lastName: response.data.result.lastName, role: response.data.result.role});
+          if(response.data.result.role === 'admin'){
+          navigate('/admintrans')
+        }else{
           navigate("/dashboard");
+        }
+        
       }else if(response.status == 403){
         setSpin('none')
         setErrDisplay('block');

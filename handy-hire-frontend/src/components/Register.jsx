@@ -87,7 +87,12 @@ function Register() {
         sessionStorage.setItem('lastName', response.data.result.lastName);
         sessionStorage.setItem('id', response.data.result.userid);
         setUser({id: response.data.result.userid, firstName: response.data.result.firstName, lastName: response.data.result.lastName, role: response.data.result.role});
-        navigate("/dashboard");
+        if(response.data.result.role === 'admin'){
+          navigate('/admintrans')
+        }else{
+          navigate("/dashboard");
+        }
+        
       }
       setSpin('none')
 

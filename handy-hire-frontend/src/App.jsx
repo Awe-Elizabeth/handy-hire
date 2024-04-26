@@ -62,6 +62,7 @@ function App() {
      <Route path="/transaction" element={<Transaction />} />
      <Route path="/success" element={<Successful />} />
      <Route path="/password" element={<Password />} />
+     <Route path="/admintrans" element={<AdminTransaction />} />
 
      </Routes>
     </UserContextProvider>
