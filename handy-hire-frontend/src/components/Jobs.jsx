@@ -9,6 +9,7 @@ import listing from '../assets/listing.png'
 import setting from '../assets/setting.png'
 import support from '../assets/support.png'
 import logout from '../assets/logout.png'
+import { Link } from 'react-router-dom'
 // import '../sass/jobs.scss'
 
 
@@ -33,17 +34,29 @@ function Jobs() {
 
           <section className="sections">
             <div className="sections_div">
-                <div className="side_bar  m-0"><span className="d-flex"><img src={home} alt="" className="img"/><p>Home </p></span><img src={arrowRight} alt="" className="images"/></div>
-                <div className="side_bar"  style={{backgroundColor: "#4862BE", color: "white"}}><span><img src={portfolio} alt="" className="img"/><p>Users</p></span><img src={arrowRight} alt="" className="images"/></div>
-                <div className="side_bar"><span><img src={message} alt="" className="imgs"/><p>Messages</p></span> <img src={arrowRight} alt="" className="images"/></div>
-                <div className="side_bar"><span><img src={message} alt="" className="imgs"/><p>Reports</p></span> <img src={arrowRight} alt="" className="images"/></div>
-                <div className="side_bar"><span><img src={message} alt="" className="imgs"/><p> Transaction</p></span> <img src={arrowRight} alt="" className="images"/></div>
-                
-                <div className="side_bar"><span><img src={listing} alt="" className="imgs"/><p>Listing</p></span> <img src={arrowRight} alt="" className="images"/></div>
+            <Link to={'/dashboard'} style={{textDecoration: 'none', color: 'black'}}>
+          <div className="side_bar  m-0"><span className="d-flex"><img src={home} alt="" className="img"/><p>Home </p></span><img src={arrowRight} alt="" className="images"/></div>
+          </Link>
+            <Link to={'/users'} style={{textDecoration: 'none', color: 'black'}}>
+            <div className="side_bar"><span><img src={portfolio} alt="" className="img"/><p>Users</p></span><img src={arrowRight} alt="" className="images"/></div>
+            </Link>
+            <Link to={'/messages'} style={{textDecoration: 'none', color: 'black'}}><div className="side_bar"><span><img src={message} alt="" className="imgs"/><p>Messages</p></span> <img src={arrowRight} alt="" className="images"/></div></Link>
+            <div className="side_bar"><span><img src={message} alt="" className="imgs"/><p>Reports</p></span> <img src={arrowRight} alt="" className="images"/></div>
+            <Link to={'/admintrans'} style={{textDecoration: 'none', color: 'black'}}>
+            <div className="side_bar"><span><img src={message} alt="" className="imgs"/><p> Transaction</p></span> <img src={arrowRight} alt="" className="images"/></div>
+            </Link>
+            <Link to={'/jobs'} style={{textDecoration: 'none', color: 'black'}}>
+            <div className="side_bar" style={{backgroundColor: "#4862BE", color: "white"}}><span><img src={listing} alt="" className="imgs"/><p>Listing</p></span> <img src={arrowRight} alt="" className="images"/></div>
+            </Link>
+            <Link to={'/settings'} style={{textDecoration: 'none', color: 'black'}}>
                 <div className="side_bar" style={{marginTop: "4rem"}}><span><img src={setting} alt="" className="img"/><p>Settings</p></span><img src={arrowRight} alt="" className="images"/></div>
+                </Link>
+                <Link to={'/help'} style={{textDecoration: 'none', color: 'black'}}>
                 <div className="side_bar"><span><img src={support} alt="" className="img"/><p>Help Center </p></span><img src={arrowRight} alt="" className="images"/></div>
-               
-                <div className="side_bar"><span><img src={logout} alt="" className="imgs"/><p>Logout </p></span><img src={arrowRight} alt="" className="images"/></div>
+                </Link>
+           <Link to={'/logout'} style={{textDecoration: 'none', color: 'black'}}>
+           <div className="side_bar"><span><img src={logout} alt="" className="imgs"/><p>Logout </p></span><img src={arrowRight} alt="" className="images"/></div>
+           </Link>
             </div>
 
             
@@ -59,7 +72,7 @@ function Jobs() {
               <span className="d-flex"> <h5 style={{marginTop: "1.5rem", marginLeft: "3rem"}}><strong>Total Jobs</strong></h5>
               <h5 style={{marginTop: "1.5rem", marginLeft: "3rem"}}><strong>100</strong></h5>
             </span>
-            <table style={{marginTop: "2rem"}}>
+            <table className='table' style={{marginTop: "2rem"}}>
                 <thead>
       
                   <tr>

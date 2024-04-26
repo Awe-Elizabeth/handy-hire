@@ -58,7 +58,10 @@ function Login() {
       }
       setSpin('none')
 
-    }).catch((err) => console.log(err));
+    }).catch((err) => {
+      console.log(err)
+      setSpin("none")
+    });
 
   }
 
@@ -131,7 +134,7 @@ function Login() {
                 <img src={google_symbol} alt="#" />
                 <img src={facebook_symbol} alt="#" />
               </div>
-              <h6>Dont have an Account? <a href="#">Sign Up</a></h6>
+              <h6>Dont have an Account? <Link to={'/register'}><a >Sign Up</a></Link></h6>
             </div>
           </div>
         </div>
