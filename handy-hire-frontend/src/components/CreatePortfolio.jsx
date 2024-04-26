@@ -4,6 +4,7 @@ import pencil from '../assets/pencil.png'
 import UserContext from '../context/userContex';
 import axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom';
+// import '../sass/createportfolio.scss'
 
 
 function CreatePortfolio() {
@@ -21,19 +22,23 @@ function CreatePortfolio() {
 
 
   const handleFileInputChange = (event) => {
-    const file = event.target.files[0];
-    console.log(file.size)
-   if(file.size > 2097152){
-      setErr("block")
-      return
-   }
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-
-    reader.onload = (event) => {
-      const base64 = event.target.result;
-      setImage(image => [...image, base64] )
-    };
+    const files = event.target.files;
+    for(let i = 0; i < files.length; i++ ){
+      console.log(files[i].size)
+      if(files[i].size > 2097152){
+        setErr("block")
+        return
+     }
+      const reader = new FileReader();
+      reader.readAsDataURL(files[i]);
+  
+      reader.onload = (event) => {
+        const base64 = event.target.result;
+        setImage(image => [...image, base64] )
+      };
+    }
+    
+   
      
   };
 
@@ -97,7 +102,7 @@ function CreatePortfolio() {
             <h2 ><strong>Add Details</strong></h2>
             <p className="mt-4">
              <h6 className="p-1">You must add at least one image or a video link to your project</h6>
-             <div style={{border:"1px solid black", width: "57%", marginTop: "2rem"}}><input type="file" placeholder="Add project title"
+             <div style={{border:"1px solid black", width: "57%", marginTop: "2rem"}}><input type="file" name='file' multiple placeholder="Add project title"
              onChange={handleFileInputChange}
              /></div>
             </p>

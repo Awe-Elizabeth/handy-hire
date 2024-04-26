@@ -4,6 +4,7 @@ import pencil from '../assets/pencil.png'
 import question from '../assets/question.png'
 import plus from '../assets/Plus-Math.png'
 import { Link } from 'react-router-dom'
+// import '../sass/password.scss'
 
 function Password() {
   return (

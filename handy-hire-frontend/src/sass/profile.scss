@@ -1,9 +1,9 @@
-Body {
-    width: 100%;
-    height: 100vh;
-    padding: 0;
-    margin: 0;
-  }
+// Body {
+//     width: 100%;
+//     height: 100vh;
+//     padding: 0;
+//     margin: 0;
+//   }
 
 .Arrow{
     display: flex;
@@ -106,5 +106,11 @@ Body {
             color: white;
             padding-top: 10px;
         } }
+    }
+}
+
+.profileTable{
+    tr{
+        height: 20px;
     }
 }

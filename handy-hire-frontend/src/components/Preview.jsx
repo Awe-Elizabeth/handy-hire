@@ -5,6 +5,7 @@ import chair2 from '../assets/chair2.png'
 import axios from 'axios'
 import{Link, useNavigate} from 'react-router-dom'
 import Dashboard from './Dashboard'
+// import '../sass/preview.scss'
 
 
 
