@@ -157,7 +157,7 @@ try {
 exports.resetPassword = async (req, res) => {
     const {id, token} = req.params;
     const {password} = req.body;
-            
+    const bcSalt = bcrypt.genSaltSync(10)
         try {
             const date = Date.now();
             const oldUser = await User.findOne({where: {userid: id}});
