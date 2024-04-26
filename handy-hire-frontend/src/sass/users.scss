@@ -1,12 +1,13 @@
 .table_div{
-    height: 700px;
+    height: 600px;
     overflow: scroll; 
+    font-family: 'Times New Roman', Times, serif;
 }
-table{
+.table{
     height: 80vh;
     overflow-y: scroll;
 }
-table tr td {
+.table tr td {
     padding:.8rem;
 
 }

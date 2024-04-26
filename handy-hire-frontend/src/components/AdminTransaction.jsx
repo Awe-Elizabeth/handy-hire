@@ -46,7 +46,7 @@ function AdminTransaction() {
              
          <div style={{marginLeft:"1.5rem"}} class="table_div">
               <h5><strong>TRANSACTIONS</strong></h5>
-              <table style={{marginTop: "2rem"}}>
+              <table style={{marginTop: "2rem"}} className="table">
                 <thead>
                   <tr>
                     <th>Transaction ID</th>

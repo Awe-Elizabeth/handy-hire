@@ -51,13 +51,13 @@ function Profile() {
                  <span style={{paddingLeft: "2rem"}}><h4>{userData.firstName} {userData.lastName}</h4>
                     <h6>{userData.state}, {userData.country}</h6></span>
             </span>
-            <div className="button"><img src={pencil} alt="#"/><button>Edit Profile</button></div>
+            <div className="button"><button>Edit </button></div>
                 
           </div>
              <div className="info">
                 <div className="d-flex" style={{justifyContent: "space-between"}}>
                     <h3>Personal Information</h3>
-                    <div className="button"><img src={pencil} alt="#"/><button>Edit</button></div>
+                    <div className="button"><button>Edit</button></div>
                 </div>
                 <table>
                     <tbody>
