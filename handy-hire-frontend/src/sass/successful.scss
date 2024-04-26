@@ -1,0 +1,20 @@
+.Transaction {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 6rem;
+  }
+  form input {
+    width: 100%;
+    display: block;
+    margin-bottom: 1rem;
+    border-radius: 7px;
+    border: 1px solid rgb(57, 57, 59);
+    padding: 8px;
+    text-align: center;
+  }
+  
+  input::placeholder {
+    color: blue;
+  }

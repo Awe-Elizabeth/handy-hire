@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react'
 import arrowUp from '../assets/arrow-up.jpg'
 import{Link, useNavigate} from 'react-router-dom'
 import UserContext from '../context/userContex';
+// import '../sass/brief.scss'
 
 
 
@@ -27,7 +28,8 @@ function PortfolioBrief() {
     <>
      <span><strong><h2 className="" style={{padding: "2rem 0 0 2rem"}}>Portfolio</h2></strong></span>
     <span className="arrow" style={{justifyContent: "space-between"}}>
-      <img src={arrowUp} alt="" style={{width:"20px", height:"20px"}} /></span><br/>
+      <Link to={'/dashboard'}><img src={arrowUp} alt="" style={{width:"20px", height:"20px"}} /></Link>
+      </span><br/>
       
       <section className="port_section">
         

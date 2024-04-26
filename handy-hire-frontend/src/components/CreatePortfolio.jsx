@@ -3,7 +3,8 @@ import arrowUp from '../assets/arrow-up.jpg'
 import pencil from '../assets/pencil.png'
 import UserContext from '../context/userContex';
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+// import '../sass/createportfolio.scss'
 
 
 function CreatePortfolio() {
@@ -13,27 +14,44 @@ function CreatePortfolio() {
   const [description, setDescription] = useState('');
   const [about, setAbout] = useState('');
   const [hireDetail, setHireDetails] = useState('');
+  const [display, setDisplay] = useState('none');
+  const [err, setErr] = useState('none');
   const imageArray = []
   const navigate = useNavigate();
 
 
 
   const handleFileInputChange = (event) => {
-    const file = event.target.files[0];
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-
-    reader.onload = (event) => {
-      const base64 = event.target.result;
-      setImage(image => [...image, base64] )
-    };
+    const files = event.target.files;
+    for(let i = 0; i < files.length; i++ ){
+      console.log(files[i].size)
+      if(files[i].size > 2097152){
+        setErr("block")
+        return
+     }
+      const reader = new FileReader();
+      reader.readAsDataURL(files[i]);
+  
+      reader.onload = (event) => {
+        const base64 = event.target.result;
+        setImage(image => [...image, base64] )
+      };
+    }
+    
+   
      
   };
 
 
   const submitPortfolio = () => {
 
+
     console.log(createPortfolioData);
+    if(image.length < 0 || skills == '' || description == '' ||about == '' || hireDetail == '' ){
+        setDisplay("block")
+        return;
+    }
+   
 
     const headers = {
       'Content-Type': 'application/json',
@@ -68,7 +86,8 @@ function CreatePortfolio() {
     <>
     <span><strong><h2 className="" style={{padding: "2rem 0 0 2rem"}}>Portfolio</h2></strong></span>
     <span className="arrow" style={{justifyContent: "space-between"}}>
-      <img src={arrowUp} alt="" style={{width:"20px", height:"20px"}} /></span><br/>
+      <Link to={'/portfoliobrief'}> <img src={arrowUp} alt="" style={{width:"20px", height:"20px"}} /></Link></span><br/>
+     
       
       <section className="port_section">
         
@@ -83,10 +102,11 @@ function CreatePortfolio() {
             <h2 ><strong>Add Details</strong></h2>
             <p className="mt-4">
              <h6 className="p-1">You must add at least one image or a video link to your project</h6>
-             <div style={{border:"1px solid black", width: "57%", marginTop: "2rem"}}><input type="file" placeholder="Add project title"
+             <div style={{border:"1px solid black", width: "57%", marginTop: "2rem"}}><input type="file" name='file' multiple placeholder="Add project title"
              onChange={handleFileInputChange}
              /></div>
             </p>
+            <p style={{ color: "red", fontSize: "1rem", display: err}}>File is too large, file must be not be larger than 2mb</p> 
             <h5 className="mt-4">Skills</h5>
             <input type="text" name="" id="" className="mt-3" placeholder="Enter skills"
             value={skills}
@@ -107,6 +127,8 @@ function CreatePortfolio() {
            value={description}
            onChange={(e) => setDescription(e.target.value)} 
            ></textarea><br/>
+          <p style={{ color: "red", fontSize: "1rem", display: display}}>All fields are required</p> 
+
            <span><button className="btn1">Cancel</button> <button className="btn2"
            onClick={submitPortfolio}
            >Continue</button></span>

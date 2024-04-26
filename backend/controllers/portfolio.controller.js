@@ -9,7 +9,7 @@ exports.getPortfolios = async(req, res) => {
     
     try {
         const [results, metadata] = await db.sequelize.query(`
-        SELECT Portfolios.id, Portfolios.defaultImage, Portfolios.details, Users.firstName, Users.lastName, Users.userid from Portfolios inner join Users on Portfolios.userid = Users.userid;
+        SELECT Portfolios.id, Portfolios.defaultImage, Portfolios.details, Users.firstName, Users.lastName, Users.userid from Portfolios inner join Users on Portfolios.userid = Users.userid group by Users.userId limit 5;
         `);
         // console.log(req.params.id);
         res.status(200).json({
@@ -39,7 +39,7 @@ exports.getPortfoliosById = async(req, res) => {
          INNER JOIN Images ON Images.portfolioId = Portfolios.id
         inner join Skills on Skills.portfolioId = Portfolios.id 
         inner join Users on Users.userid = Portfolios.userId  
-        where Portfolios.id = "${req.params.id}"
+        where Portfolios.id = "${req.params.id}" limit 5
     `)       
      // console.log(req.params.id);
      
@@ -91,7 +91,7 @@ exports.getPortfoliosByCategoryId = async(req, res) => {
     
     try {
         const [results, metadata] = await db.sequelize.query(`
-        select Portfolios.id, Portfolios.defaultImage, Portfolios.details, Users.firstName from Portfolios inner join Users on Users.userid = Portfolios.userId  where Users.CategoryId = "${req.params.id}" group by Users.userid;
+        select Portfolios.id, Portfolios.defaultImage, Portfolios.details, Users.firstName from Portfolios inner join Users on Users.userid = Portfolios.userId  where Users.CategoryId = "${req.params.id}" group by Users.userid Limit 5;
     `)       
 
 
@@ -115,6 +115,9 @@ exports.createPortfolio = async(req, res) => {
         const {title, completionDate, images, videos, skills, description, about, details} = req.body
         let defaultImage;
         let imagesArr = [];
+        let err ='';
+
+        
         const portfolio = await  Portfolio.create({
             title: title,
             completionDate: completionDate,

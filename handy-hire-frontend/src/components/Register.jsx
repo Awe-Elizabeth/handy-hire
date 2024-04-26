@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom'
 import axios from 'axios'
 import { useNavigate } from "react-router-dom";
 import UserContext from '../context/userContex'
+import Spinner from './Spinner'
 
 function Register() {
   const [firstName, setFirstName] = useState('');
@@ -17,11 +18,13 @@ function Register() {
   const [password, setPassword] = useState('');
   const [country, setCountry] = useState('');
   const [state, setState] = useState('');
+  const [spin, setSpin] = useState('none')
   const [categories, setCategories] = useState([]);
   const [category, setCategory] = useState('');
   const [logo, setLogo] = useState(handyicon3);
   const [agree, setAgree] = useState(false)
   const [errDisplay, setErrDisplay] = useState('none');
+  const [catErr, setCatErr] = useState('none');
   const navigate = useNavigate();
 
   const {setUser, user} = useContext(UserContext);
@@ -55,12 +58,20 @@ function Register() {
     console.log(agree);
     console.log(registerData)
 
-    if(agree !== true){
+    if(category === ""){
+      setCatErr('block')
+      return;
+    }else{
+      setCatErr('none');
+    }
+
+    if(agree !== true ){
       setErrDisplay('block');
       return;
     }else{
       setErrDisplay('none');
     }
+    setSpin('flex')
 
     const headers = {
       'Content-Type': 'application/json',
@@ -78,6 +89,7 @@ function Register() {
         setUser({id: response.data.result.userid, firstName: response.data.result.firstName, lastName: response.data.result.lastName, role: response.data.result.role});
         navigate("/dashboard");
       }
+      setSpin('none')
 
     }).catch((err) => console.log(err));
 
@@ -142,13 +154,12 @@ function Register() {
              value={country}
              onChange={(e) => setCountry(e.target.value)} 
             />
-
-            <label htmlFor="Category">Select a Category</label>
-            <select className='input' id="categories" name="categories"
+            <label htmlFor="category">Category</label>
+            <select className='input' style={{padding: "2px"}} id="categories" name="categories"
             value={category} 
             onChange={e => setCategory(e.target.value)} 
             >
-            <option value=""></option>
+            <option value="">Select a Category</option>
             {          
             categories.map((category, index) => {
                     return(
@@ -160,7 +171,7 @@ function Register() {
                   })
                 }
             </select>
-          
+          <p style={{ color: "red", fontSize: "1rem", display: catErr}}>Please select a valid category</p>
           <p className="form_text">
             <img src={logo} 
             onClick={() => {logo == handyicon3 ? setLogo(handyicon2) : setLogo(handyicon3)
@@ -175,6 +186,7 @@ function Register() {
           </p>
           <p style={{color: "red", fontSize: "1rem", display: errDisplay}}> You need to agree to signup</p>
           <br />
+          <Spinner display={spin}/>
           <button
           type="submit"
           >Signup</button>

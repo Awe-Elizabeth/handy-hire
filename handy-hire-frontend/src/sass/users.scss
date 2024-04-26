@@ -1,0 +1,16 @@
+.table_div{
+    height: 700px;
+    overflow: scroll; 
+}
+table{
+    height: 80vh;
+    overflow-y: scroll;
+}
+table tr td {
+    padding:.8rem;
+
+}
+thead{
+    border-bottom: 1px solid black;
+    text-align: center;
+}

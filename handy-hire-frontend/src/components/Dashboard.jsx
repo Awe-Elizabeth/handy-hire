@@ -116,8 +116,6 @@ function Dashboard() {
       navigate('/dashboardinfo')
     }
 
-  
-  
 
 
   return (
@@ -141,12 +139,20 @@ function Dashboard() {
                 <div className="side_bar  m-0" style={{backgroundColor: "#4862BE"}}><span className="d-flex"><img src={home} alt="" className="img"/><p>Home </p></span><img src={arrowRight} alt="" className="images"/></div>
                 <Link to={'/portfoliobrief'} style={{textDecoration: 'none', color: 'black'}}><div className="side_bar"><span><img src={portfolio} alt="" className="img"/><p>Portfolio </p></span><img src={arrowRight} alt="" className="images"/></div></Link>
                 
-                <div className="side_bar"><span><img src={message} alt="" className="imgs"/><p>Messages</p></span> <img src={arrowRight} alt="" className="images"/></div>
-                <div className="side_bar"><span><img src={message} alt="" className="imgs"/><p>Transactions</p></span> <img src={arrowRight} alt="" className="images"/></div>
+        <Link to={'/messages'} style={{textDecoration: 'none', color: 'black'}}><div className="side_bar"><span><img src={message} alt="" className="imgs"/><p>Messages</p></span> <img src={arrowRight} alt="" className="images"/></div></Link>
+                <Link to={'/transaction'} style={{textDecoration: 'none', color: 'black'}}><div className="side_bar"><span><img src={message} alt="" className="imgs"/><p>Transactions</p></span> <img src={arrowRight} alt="" className="images"/></div></Link>
+                
                 <div className="side_bar"><span><img src={listing} alt="" className="imgs"/><p>Listing</p></span> <img src={arrowRight} alt="" className="images"/></div>
+                <Link to={'/settings'} style={{textDecoration: 'none', color: 'black'}}>
                 <div className="side_bar" style={{marginTop: "4rem"}}><span><img src={setting} alt="" className="img"/><p>Settings</p></span><img src={arrowRight} alt="" className="images"/></div>
-                <div className="side_bar"><span><img src={support} alt="" className="img"/><p>Help Center </p></span><img src={arrowRight} alt="" className="images"/></div>
-                <div className="side_bar"><span><img src={logout} alt="" className="imgs"/><p>Logout </p></span><img src={arrowRight} alt="" className="images"/></div>
+                </Link>
+                <Link to={'/help'} style={{textDecoration: 'none', color: 'black'}}> 
+                    <div className="side_bar"><span><img src={support} alt="" className="img"/><p>Help Center </p></span><img src={arrowRight} alt="" className="images"/></div>
+                </Link>
+                <Link to={'/login'} style={{textDecoration: 'none', color: 'black'}}>
+                <div className="side_bar" onClick={() => {sessionStorage.clear()}}><span><img src={logout} alt="" className="imgs"/><p>Logout </p></span><img src={arrowRight} alt="" className="images"/></div>
+                </Link>
+                
             </div>
          
            <div className="Dashboard">
@@ -154,11 +160,14 @@ function Dashboard() {
             <div className="Dashboard_header">
                 <span><h4>RECOMMENDED FOR YOU</h4>
                     <h6>Get matched with an artisan</h6>
-                <button className="button_one">Create a brief</button></span>
+                    <Link to={'/matching'}><button className="button_one">Create a brief</button></Link>
+                  </span>
                 <span>
                     <h4>CLIENT RECOMMENDATION</h4>
                     <h6>Tailor HandyHire to your needs.</h6>
                     <button className="button_one">Add your info</button>
+                    
+                   
                 </span>
             </div>
             
@@ -258,7 +267,7 @@ function Dashboard() {
             )
           })
         }
-          <div className="card cards" style={{width: "270px"}}>
+          {/* <div className="card cards" style={{width: "270px"}}>
           <img src={rail} className="card-img-top" alt="..."  style={{height: "200px", width: "270px"}}/>
           <div className="card-body">
             <h5 className="card-title"><img src={mary} alt=""/>Kate</h5>
@@ -289,7 +298,7 @@ function Dashboard() {
               <p className="card-text" style={{width: "320px"}}>I create chairs according to custom specifications or designs,</p>
              
             </div>
-          </div>
+          </div> */}
        </div>
         <div className="popular">
           <h4><strong>Get Inspired by Work done on HandyHire</strong></h4>

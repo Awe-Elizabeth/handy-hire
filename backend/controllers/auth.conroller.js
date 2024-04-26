@@ -115,10 +115,10 @@ exports.forgotPassword = async (req, res) => {
             }
         });
         
-        await forgotPasswordMail(email, req.headers.host, token);
+        await forgotPasswordMail(email, req.headers.host, user.userid, token);
 
-        res.status(400).json({
-            success: false,
+        res.status(200).json({
+            success: true,
             result: _user
         });
         
@@ -131,6 +131,62 @@ exports.forgotPassword = async (req, res) => {
     }
     
 }
+
+exports.resetPassword = async (req, res) => {
+const {id, token} = req.params
+        
+try {
+    const date = Date.now();
+    const oldUser = await User.findOne({where: {userid: id}});
+    if(!oldUser){
+       return res.json({message:"User does not exist"})
+    }
+
+    if(token !== oldUser.token || date > oldUser.tokenExp){
+        return res.json({message: "Not Verified"}) 
+    }
+    console.log(date)
+    console.log(oldUser.tokenExp)
+    res.render("reset-password", { email: oldUser.email, status: "not verified"});
+} catch (error) {
+    console.log(error)
+}
+    
+}
+
+exports.resetPasswordPost = async (req, res) => {
+    const {id, token} = req.params;
+    const {password} = req.body;
+    const bcSalt = bcrypt.genSaltSync(10)
+
+        try {
+            const date = Date.now();
+            const oldUser = await User.findOne({where: {userid: id}});
+            if(!oldUser){
+            return res.json({message:"User does not exist"})
+            }
+        
+            if(token !== oldUser.token || date > oldUser.tokenExp){
+                return res.json({message: "Not Verified"}) 
+            }
+            const savedPassword = bcrypt.hashSync(password, bcSalt)
+
+            await User.update({
+                    password: savedPassword
+                },
+                {
+                    where: {
+                        userid: id
+                    }
+                });
+        
+            res.render("reset-password", { email: oldUser.email, status: "verified"});
+            
+        } catch (error) {
+            console.log(error)
+        }
+        
+    }
 
 const signToken = (user) => {
     const token = jwt.sign(

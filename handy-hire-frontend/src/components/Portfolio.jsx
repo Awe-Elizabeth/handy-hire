@@ -13,6 +13,7 @@ import cupboard from '../assets/cupboard.png'
 import board from '../assets/board.png'
 import furniture from '../assets/furniture.png'
 import chair3 from '../assets/chair3.png'
+// import '../sass/portfolio.scss'
 
 function Portfolio() {
   return (
