@@ -5,11 +5,14 @@
 .table{
     height: 80vh;
     overflow-y: scroll;
-}
-.table tr td {
-    padding:.8rem;
+   padding:.8rem;
+    tr td{
+        padding:.8rem;
+    }
 
 }
+
+
 thead{
     border-bottom: 1px solid black;
     text-align: center;
