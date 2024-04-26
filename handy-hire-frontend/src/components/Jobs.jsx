@@ -24,7 +24,7 @@ function Jobs() {
                 height:"120px"}}/></div>
             <div className="header_icons">
                 <div className="search_bar" style={{marginRight: "10rem"}}>  <img src={search} alt="search" style={{width:"25px", height:"25px"}} className="p-1"/> <p className="mr-2">What service are you looking for?</p></div>
-                <div className="header_img"> <button style={{backgroundColor:"#4862BE", border: "none", borderRadius: "10px", color: "white", padding: "8px"}}>VIEW ALL</button> <button  style={{backgroundColor: "#4862BE",  border: "none", borderRadius: "10px", color: "white", padding: "8px"}}>EXPORT TO CSV</button></div>
+                <div className="header_img"> <button style={{backgroundColor:"#4862BE", border: "none", borderRadius: "10px", color: "white", padding: "8px"}}>VIEW ALL</button> <button  style={{backgroundColor: "#4862BE",  border: "none", borderRadius: "10px", color: "white", padding: "6px",marginTop:"10px"}}>EXPORT TO CSV</button></div>
            
                 </div>
             

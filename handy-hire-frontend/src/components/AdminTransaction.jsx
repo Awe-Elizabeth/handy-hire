@@ -60,6 +60,7 @@ function AdminTransaction() {
              
          <div style={{marginLeft:"1.5rem"}} class="table_div">
               <h5><strong>TRANSACTIONS</strong></h5>
+
               <table className="table" style={{marginTop: "2rem"}}>
                 <thead>
                   <tr>

@@ -49,7 +49,7 @@ function PortfolioBrief() {
              onChange={(e) => setTitle(e.target.value)}
              />
             </p>
-            <h5 className="mt-4">Completion Date</h5>
+            <h5 className="mt-4"> Date</h5>
             <input type="date" name="" id="" className="mt-3"
               value={date}
               onChange={(e) => setDate(e.target.value)}

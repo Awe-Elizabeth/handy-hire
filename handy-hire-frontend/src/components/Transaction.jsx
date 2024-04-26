@@ -12,7 +12,7 @@ function Transaction() {
   return (
     <>
      <div className="Transaction">
-      <div style={{width: "40%"}}>
+      <div style={{width: "50%"}}>
 
           <div> 
              <div>
