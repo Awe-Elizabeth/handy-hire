@@ -4,6 +4,7 @@ import verve from '../assets/verve.png'
 import visa from '../assets/visa.png'
 import frame from '../assets/Frame.png'
 import { Link, Navigate, useNavigate } from 'react-router-dom'
+// import '../sass/payment.scss'
 
 
 function Payment() {

@@ -9,7 +9,7 @@ import setting from '../assets/setting.png'
 import support from '../assets/support.png'
 import listing from '../assets/listing.png'
 import logout from '../assets/logout.png'
-
+// import '../sass/admin-trans.scss'
 
 function AdminTransaction() {
   return (

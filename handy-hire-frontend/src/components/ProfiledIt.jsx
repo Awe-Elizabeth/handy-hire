@@ -2,6 +2,7 @@ import React from 'react'
 import mary from '../assets/mary.png'
 import arrowLeft from '../assets/arrow-left.png'
 import pencil from '../assets/pencil.png'
+// import '../sass/profiledit.scss'
 
 function ProfiledIt() {
   return (

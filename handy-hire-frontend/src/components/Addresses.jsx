@@ -3,6 +3,7 @@ import arrowUp from '../assets/arrow-up.jpg'
 import verve from '../assets/verve.png'
 import visa from '../assets/visa.png'
 import frame from '../assets/Frame.png'
+// import '../sass/addresses.scss'
 
 function Addresses() {
   return (
