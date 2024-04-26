@@ -139,9 +139,8 @@ function Dashboard() {
                 <div className="side_bar  m-0" style={{backgroundColor: "#4862BE"}}><span className="d-flex"><img src={home} alt="" className="img"/><p>Home </p></span><img src={arrowRight} alt="" className="images"/></div>
                 <Link to={'/portfoliobrief'} style={{textDecoration: 'none', color: 'black'}}><div className="side_bar"><span><img src={portfolio} alt="" className="img"/><p>Portfolio </p></span><img src={arrowRight} alt="" className="images"/></div></Link>
                 
-                <Link to={'/messages'} style={{textDecoration: 'none', color: 'black'}}><div className="side_bar"><span><img src={message} alt="" className="imgs"/><p>Messages</p></span> <img src={arrowRight} alt="" className="images"/></div></Link>
+        <Link to={'/messages'} style={{textDecoration: 'none', color: 'black'}}><div className="side_bar"><span><img src={message} alt="" className="imgs"/><p>Messages</p></span> <img src={arrowRight} alt="" className="images"/></div></Link>
                 <Link to={'/transaction'} style={{textDecoration: 'none', color: 'black'}}><div className="side_bar"><span><img src={message} alt="" className="imgs"/><p>Transactions</p></span> <img src={arrowRight} alt="" className="images"/></div></Link>
-                
                 
                 <div className="side_bar"><span><img src={listing} alt="" className="imgs"/><p>Listing</p></span> <img src={arrowRight} alt="" className="images"/></div>
                 <Link to={'/settings'} style={{textDecoration: 'none', color: 'black'}}>
