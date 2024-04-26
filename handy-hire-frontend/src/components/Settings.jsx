@@ -1,13 +1,31 @@
 import React from 'react'
 import arrowUp from '../assets/arrow-up.jpg'
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 import { Link, Navigate, useNavigate } from 'react-router-dom'
 
 
 function Settings() {
+  const navigate = useNavigate();
+
+  const showSwal = () => {
+    withReactContent(Swal).fire({
+      title: "Success",
+      text: "Your changes have been saved!",
+      icon: "success",
+      confirmButtonText: "OK",
+
+  }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        navigate('/dashboard')
+      } 
+    })
+  }
+
   return (
     <>
-    <span
-      ><strong
+    <span><strong
         ><h2 className="" style={{padding: "2rem 0 0 2rem"}}>Settings</h2></strong></span>
     <span
       className="arrow d-flex"
@@ -40,8 +58,7 @@ function Settings() {
             <div className="preview_div1">
               <span style={{width: "100%"}}
                 ><h6>Type</h6>
-                <h6>Email</h6></span
-              >
+                <h6>Email</h6></span>
               <span>
                 <h6>Inbox Messages</h6>
                 <input type="checkbox"
@@ -71,7 +88,7 @@ function Settings() {
             <input type="range"
           /></span>
          </div>
-         <button className="buttonn">save Changes</button>
+         <button className="buttonn" onClick={showSwal}>save Changes</button>
         </div>  
       </div>    
     </section>

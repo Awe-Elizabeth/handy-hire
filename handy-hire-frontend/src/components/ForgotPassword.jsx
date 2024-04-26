@@ -1,12 +1,18 @@
 import React, { useState } from 'react'
 import handyimg from '../assets/handyimg.jpg'
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
 function ForgotPassword() {
   const [email, setEmail] = useState('');
+  const [dis, setDis] = useState('none');
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault()
+   
 
     console.log(forgotPasswordDetails);
 
@@ -20,6 +26,8 @@ function ForgotPassword() {
       if(response.data.success === true){
         //status = true
         console.log(response.data)
+        showSwal()
+        // navigate('/login')
       
       }
 
@@ -27,6 +35,21 @@ function ForgotPassword() {
   }
 const forgotPasswordDetails = {
   email: email
+}
+
+const showSwal = () => {
+  withReactContent(Swal).fire({
+    title: "Success",
+    text: "An Email has been sent",
+    icon: "success",
+    confirmButtonText: "OK",
+
+}).then((result) => {
+    /* Read more about isConfirmed, isDenied below */
+    if (result.isConfirmed) {
+      navigate('/login')
+    } 
+  })
 }
 
   return (
@@ -44,6 +67,8 @@ const forgotPasswordDetails = {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             />
+            {/* <p style={{color: "red", fontSize: "1rem", display: errDisplay}}> You need to agree to signup</p> */}
+
             <button style={{marginTop: "5rem"}}>Submit</button>
           </form>              
           </div>
