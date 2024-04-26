@@ -22,6 +22,7 @@ const categoryRoutes = require('./routes/category.router');
 
 
 app.use(express.json({limit: '2mb'}))
+app.set("view engine", "ejs");
 app.use(express.urlencoded({extended: false, limit: '2mb'}))
 app.use(cors())
 
