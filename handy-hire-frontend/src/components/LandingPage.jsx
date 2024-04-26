@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import logos from '../assets/logos.png'
+// import '../sass/landingpage.scss'
 
 function LandingPage() {
   return (

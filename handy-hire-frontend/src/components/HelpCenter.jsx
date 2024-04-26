@@ -19,6 +19,8 @@ import frame4 from '../assets/Frame4.png'
 import frame2 from '../assets/frame2.png'
 import phone from '../assets/Phone.png'
 import { Link } from 'react-router-dom'
+import { Accordion } from "react-bootstrap";
+// import '../sass/helpcentre.scss'
 
 function HelpCenter() {
   var firstName = sessionStorage.getItem("firstName");

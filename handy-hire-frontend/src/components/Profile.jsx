@@ -4,6 +4,8 @@ import arrowLeft from '../assets/arrow-left.png'
 import pencil from '../assets/pencil.png'
 import axios from 'axios'
 import UserContext from '../context/userContex'
+// import '../sass/profile.scss'
+
 
 function Profile() {
   const [userData, setUserData] = useState({});
@@ -59,7 +61,7 @@ function Profile() {
                     <h3>Personal Information</h3>
                     <div className="button"><img src={pencil} alt="#"/><button>Edit</button></div>
                 </div>
-                <table>
+                <table className='profileTable'>
                     <tbody>
                         <tr>
                             <td>First Name</td>

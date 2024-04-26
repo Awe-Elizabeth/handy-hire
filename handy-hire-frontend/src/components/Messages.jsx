@@ -10,6 +10,7 @@ import email from "../assets/Email.png"
 import more from "../assets/more.png"
 import forward from "../assets/forward.png"
 import { Link } from 'react-router-dom'
+// import '../sass/messages.scss'
 
 
 function Messages() {
