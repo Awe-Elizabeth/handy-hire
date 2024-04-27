@@ -25,12 +25,16 @@ function Register() {
   const [agree, setAgree] = useState(false)
   const [errDisplay, setErrDisplay] = useState('none');
   const [catErr, setCatErr] = useState('none');
+  const [catDisplay, setCatDisplay] = useState('block');
   const navigate = useNavigate();
 
   const {setUser, user} = useContext(UserContext);
 
   useEffect(() => {
     document.title = 'Register';
+    if(user.role === 'business'){
+      setCatDisplay("none")
+    }
 
     let length;
     const headers = {
@@ -58,12 +62,15 @@ function Register() {
     console.log(agree);
     console.log(registerData)
 
-    if(category === ""){
-      setCatErr('block')
-      return;
-    }else{
-      setCatErr('none');
+    if(user.role == 'artisan'){
+      if(category === ""){
+        setCatErr('block')
+        return;
+      }else{
+        setCatErr('none');
+      }
     }
+    
 
     if(agree !== true ){
       setErrDisplay('block');
@@ -85,6 +92,7 @@ function Register() {
         sessionStorage.setItem('token', response.data.token);
         sessionStorage.setItem('firstName', response.data.result.firstName);
         sessionStorage.setItem('lastName', response.data.result.lastName);
+        sessionStorage.setItem('role', response.data.result.role);
         sessionStorage.setItem('id', response.data.result.userid);
         setUser({id: response.data.result.userid, firstName: response.data.result.firstName, lastName: response.data.result.lastName, role: response.data.result.role});
         if(response.data.result.role === 'admin'){
@@ -159,8 +167,8 @@ function Register() {
              value={country}
              onChange={(e) => setCountry(e.target.value)} 
             />
-            <label htmlFor="category">Category</label>
-            <select className='select' style={{padding: "2px"}} id="categories" name="categories"
+            <label htmlFor="category" style={{display: catDisplay}}>Category</label>
+            <select className='select' style={{padding: "2px", display: catDisplay}} id="categories" name="categories"
             value={category} 
             onChange={e => setCategory(e.target.value)} 
             >

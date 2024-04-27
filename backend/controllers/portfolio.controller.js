@@ -9,7 +9,7 @@ exports.getPortfolios = async(req, res) => {
     
     try {
         const [results, metadata] = await db.sequelize.query(`
-        SELECT Portfolios.id, Portfolios.defaultImage, Portfolios.details, Users.firstName, Users.lastName, Users.userid from Portfolios inner join Users on Portfolios.userid = Users.userid group by Users.userId Portfolios.createdAt desc limit 5;
+        SELECT Portfolios.id, Portfolios.defaultImage, Portfolios.details, Users.firstName, Users.lastName, Users.userid from Portfolios inner join Users on Portfolios.userid = Users.userid group by Users.userId order by Portfolios.createdAt desc limit 5;
         `);
         // console.log(req.params.id);
         res.status(200).json({
@@ -91,7 +91,7 @@ exports.getPortfoliosByCategoryId = async(req, res) => {
     
     try {
         const [results, metadata] = await db.sequelize.query(`
-        select Portfolios.id, Portfolios.defaultImage, Portfolios.details, Users.firstName from Portfolios inner join Users on Users.userid = Portfolios.userId  where Users.CategoryId = "${req.params.id}" group by Users.userid Portfolios.createdAt desc Limit 5;
+        select Portfolios.id, Portfolios.defaultImage, Portfolios.details, Users.firstName from Portfolios inner join Users on Users.userid = Portfolios.userId  where Users.CategoryId = "${req.params.id}" group by Users.userid order by Portfolios.createdAt desc Limit 5;
     `)       
 
 
