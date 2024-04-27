@@ -160,7 +160,7 @@ function Register() {
              onChange={(e) => setCountry(e.target.value)} 
             />
             <label htmlFor="category">Category</label>
-            <select className='input' style={{padding: "2px"}} id="categories" name="categories"
+            <select className='select' style={{padding: "2px"}} id="categories" name="categories"
             value={category} 
             onChange={e => setCategory(e.target.value)} 
             >
