@@ -45,7 +45,7 @@ function Login() {
         sessionStorage.setItem('firstName', response.data.result.firstName);
         sessionStorage.setItem('lastName', response.data.result.lastName);
         sessionStorage.setItem('id', response.data.result.userid);
-        sessionStorage.setItem('role', response.data.result.userid);
+        sessionStorage.setItem('role', response.data.result.role);
           setUser({id: response.data.result.userid, firstName: response.data.result.firstName, lastName: response.data.result.lastName, role: response.data.result.role});
           if(response.data.result.role === 'admin'){
           navigate('/admintrans')
